@@ -40,7 +40,7 @@ sstr_t sstr_of(const void* data, size_t length) {
     if (length <= SHORT_STR_CAPACITY) {
         memcpy(s->short_str, data, length);
     } else {
-        s->long_str = (char*)realloc((void*)data, length);
+        s->long_str = (char*)realloc((void*)data, length + 1);
         s->long_str_cap = length;
     }
     s->length = length;
@@ -72,19 +72,19 @@ void sstr_append_zero(sstr_t s, size_t length) {
     STR* ss = (STR*)s;
     if (STR_SHORT_P(s)) {
         if (SHORT_STR_CAPACITY - ss->length > length) {
-            memset(ss->short_str + ss->length, 0, length);
+            memset(ss->short_str + ss->length, 0, length + 1);
             ss->length += length;
             return;
         }
     } else {
         if (ss->long_str_cap - ss->length > length) {
-            memset(ss->long_str + ss->length, 0, length);
+            memset(ss->long_str + ss->length, 0, length + 1);
             ss->length += length;
             return;
         }
     }
-    ss->long_str = (char*)realloc(STR_PTR(s), length + ss->length);
-    memset(ss->long_str + ss->length, 0, length);
+    ss->long_str = (char*)realloc(STR_PTR(s), length + ss->length + 1);
+    memset(ss->long_str + ss->length, 0, length + 1);
     ss->length += length;
 }
 

@@ -94,6 +94,10 @@ void sstr_append_of(sstr_t s, const void* data, size_t length) {
     memcpy(STR_PTR(s) + oldlen, data, length);
 }
 
+void sstr_append(sstr_t dst, sstr_t src) {
+    sstr_append_of(dst, STR_PTR(src), sstr_length(src));
+}
+
 sstr_t sstr_substr(sstr_t s, size_t index, size_t len) {
     size_t minlen = len;
     size_t str_len = sstr_length(s);

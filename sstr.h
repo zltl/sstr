@@ -130,7 +130,7 @@ sstr_t sstr_substr(sstr_t s, size_t index, size_t len);
  *    %S                        null-terminated wchar string
  *    %C                        wchar
  *
- *  if %u/%x/%X, tailing z/d/l/D/L can be ignore
+ *  if %u/%x/%X, tailing d can be ignore
  */
 
 unsigned char* sstr_snprintf(unsigned char* buf, size_t buf_size,

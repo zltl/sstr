@@ -106,6 +106,36 @@ void sstr_append(sstr_t dst, sstr_t src);
  */
 sstr_t sstr_substr(sstr_t s, size_t index, size_t len);
 
+/**
+ * @brief Printf implement.
+ *
+ * supported formats:
+ *    %[0][width]T              time_t
+ *    %[0][width][u][x|X]z      ssize_t/size_t
+ *    %[0][width][u][x|X]d      int/u_int
+ *    %[0][width][u][x|X]l      long
+ *    %[0][width][u][x|X]D      int32_t/uint32_t
+ *    %[0][width][u][x|X]L      int64_t/uint64_t
+ *    %[0][width][.width]f      double, max valid number fits to %18.15f
+ *    %p                        void *
+ *    %S                        sstr_t
+ *    %s                        null-terminated string
+ *    %*s                       length and string
+ *    %Z                        '\0'
+ *    %N                        '\n'
+ *    %c                        char
+ *    %%                        %
+ *
+ *  reserved:
+ *    %S                        null-terminated wchar string
+ *    %C                        wchar
+ *
+ *  if %u/%x/%X, tailing z/d/l/D/L can be ignore
+ */
+
+unsigned char* sstr_snprintf(unsigned char* buf, size_t buf_size,
+                             const char* fmt, ...);
+
 #ifdef __cplusplus
 }
 #endif

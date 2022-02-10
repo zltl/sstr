@@ -1,8 +1,13 @@
 #include "sstr.h"
 
 #include <malloc.h>
+#include <stdarg.h>
+#include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define SHORT_STR_CAPACITY 17
 
@@ -105,4 +110,372 @@ sstr_t sstr_substr(sstr_t s, size_t index, size_t len) {
         minlen = str_len;
     }
     return sstr_of(STR_PTR(s) + index, minlen);
+}
+
+unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
+                              const char* fmt, va_list args);
+static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,
+                                       uint64_t ui64, unsigned char zero,
+                                       unsigned int hexadecimal,
+                                       unsigned width);
+
+unsigned char* sstr_snprintf(unsigned char* buf, size_t buf_size,
+                             const char* fmt, ...) {
+    unsigned char* p;
+    va_list args;
+
+    va_start(args, fmt);
+    p = sstr_vslprintf(buf, buf + buf_size, fmt, args);
+    va_end(args);
+    return p;
+}
+
+#define _MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define _MIN(x, y) (((x) < (y)) ? (x) : (y))
+#define LF (unsigned char)'\n'
+#define CR (unsigned char)'\r'
+#define CRLF "\r\n"
+
+#ifndef ssize_t
+#define ssize_t int64_t
+#endif
+unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
+                              const char* fmt, va_list args) {
+    unsigned char *p, zero;
+    int d;
+    double f;
+    size_t len, slen;
+    int64_t i64;
+    uint64_t ui64, frac;
+    unsigned int width, sign, hex, frac_width, scale, n;
+    STR* S;
+    /* a default d after %..x/u  */
+    int df_d;
+
+    while (*fmt && buf < last) {
+        /*
+         * "buf < last" means that we could copy at least one character:
+         * the plain character, "%%", "%c", and minus without the checking
+         */
+
+        if (*fmt == '%') {
+            i64 = 0;
+            ui64 = 0;
+
+            zero = (unsigned char)((*++fmt == '0') ? '0' : ' ');
+            width = 0;
+            sign = 1;
+            hex = 0;
+            frac_width = 0;
+            slen = (size_t)-1;
+
+            while (*fmt >= '0' && *fmt <= '9') {
+                width = width * 10 + (*fmt++ - '0');
+            }
+
+            df_d = 0;
+            for (;;) {
+                switch (*fmt) {
+                    case 'u':
+                        sign = 0;
+                        fmt++;
+                        df_d = 1;
+                        continue;
+
+                    case 'X':
+                        hex = 2;
+                        sign = 0;
+                        fmt++;
+                        df_d = 1;
+                        continue;
+
+                    case 'x':
+                        hex = 1;
+                        sign = 0;
+                        fmt++;
+                        df_d = 1;
+                        continue;
+
+                    case '.':
+                        fmt++;
+
+                        while (*fmt >= '0' && *fmt <= '9') {
+                            frac_width = frac_width * 10 + (*fmt++ - '0');
+                        }
+
+                        break;
+
+                    case '*':
+                        slen = va_arg(args, size_t);
+                        fmt++;
+                        continue;
+
+                    default:
+                        break;
+                }
+
+                break;
+            }
+
+            switch (*fmt) {
+                case 'S':
+                    S = va_arg(args, STR*);
+
+                    len = _MIN(((size_t)(last - buf)), S->length);
+                    memcpy(buf, STR_PTR(S), len);
+                    buf += len;
+                    fmt++;
+
+                    continue;
+
+                case 's':
+                    p = va_arg(args, unsigned char*);
+
+                    if (p == NULL) {
+                        p = (unsigned char*)"NULL";
+                    }
+
+                    if (slen == (size_t)-1) {
+                        while (*p && buf < last) {
+                            *buf++ = *p++;
+                        }
+
+                    } else {
+                        len = _MIN(((size_t)(last - buf)), slen);
+                        buf = (unsigned char*)memcpy(buf, p, len);
+                    }
+
+                    fmt++;
+
+                    continue;
+
+                case 'T':
+                    i64 = (int64_t)va_arg(args, time_t);
+                    sign = 1;
+                    df_d = 0;
+                    break;
+
+                case 'z':
+                    if (sign) {
+                        i64 = (int64_t)va_arg(args, ssize_t);
+                    } else {
+                        ui64 = (uint64_t)va_arg(args, size_t);
+                    }
+                    df_d = 0;
+                    break;
+
+                case 'd':
+                    if (sign) {
+                        i64 = (int64_t)va_arg(args, int);
+                    } else {
+                        ui64 = (uint64_t)va_arg(args, unsigned int);
+                    }
+                    df_d = 0;
+                    break;
+
+                case 'l':
+                    if (sign) {
+                        i64 = (int64_t)va_arg(args, long);
+                    } else {
+                        ui64 = (uint64_t)va_arg(args, unsigned long);
+                    }
+                    df_d = 0;
+                    break;
+
+                case 'D':
+                    if (sign) {
+                        i64 = (int64_t)va_arg(args, int32_t);
+                    } else {
+                        ui64 = (uint64_t)va_arg(args, uint32_t);
+                    }
+                    df_d = 0;
+                    break;
+
+                case 'L':
+                    if (sign) {
+                        i64 = va_arg(args, int64_t);
+                    } else {
+                        ui64 = va_arg(args, uint64_t);
+                    }
+                    df_d = 0;
+                    break;
+
+                case 'f':
+                    f = va_arg(args, double);
+
+                    if (f < 0) {
+                        *buf++ = '-';
+                        f = -f;
+                    }
+
+                    ui64 = (int64_t)f;
+                    frac = 0;
+
+                    if (frac_width) {
+                        scale = 1;
+                        for (n = frac_width; n; n--) {
+                            scale *= 10;
+                        }
+
+                        frac = (uint64_t)((f - (double)ui64) * scale + 0.5);
+
+                        if (frac == scale) {
+                            ui64++;
+                            frac = 0;
+                        }
+                    }
+
+                    buf = sstr_sprintf_num(buf, last, ui64, zero, 0, width);
+
+                    if (frac_width) {
+                        if (buf < last) {
+                            *buf++ = '.';
+                        }
+
+                        buf = sstr_sprintf_num(buf, last, frac, '0', 0,
+                                               frac_width);
+                    }
+
+                    fmt++;
+
+                    continue;
+
+                case 'p':
+                    ui64 = (uintptr_t)va_arg(args, void*);
+                    hex = 2;
+                    sign = 0;
+                    zero = '0';
+                    width = 2 * sizeof(void*);
+                    break;
+
+                case 'c':
+                    d = va_arg(args, int);
+                    *buf++ = (unsigned char)(d & 0xff);
+                    fmt++;
+
+                    continue;
+
+                case 'Z':
+                    *buf++ = '\0';
+                    fmt++;
+
+                    continue;
+
+                case 'N':
+                    *buf++ = LF;
+                    fmt++;
+
+                    continue;
+
+                case '%':
+                    *buf++ = '%';
+                    fmt++;
+
+                    continue;
+
+                default:
+                    if (df_d) {
+                        if (sign) {
+                            i64 = (int64_t)va_arg(args, int);
+                        } else {
+                            ui64 = (uint64_t)va_arg(args, unsigned int);
+                        }
+                        break;
+                    }
+                    if (*fmt) *buf++ = *fmt++;
+
+                    continue;
+            }
+
+            if (sign) {
+                if (i64 < 0) {
+                    *buf++ = '-';
+                    ui64 = (uint64_t)-i64;
+
+                } else {
+                    ui64 = (uint64_t)i64;
+                }
+            }
+
+            buf = sstr_sprintf_num(buf, last, ui64, zero, hex, width);
+
+            if (df_d && *fmt) {  // %xabc not %xd, move a to buf
+                *buf++ = *fmt++;
+            } else if (*fmt) {
+                fmt++;
+            }
+
+        } else {
+            *buf++ = *fmt++;
+        }
+    }
+
+    *buf = 0;
+
+    return buf;
+}
+
+#define SSTR_INT32_LEN (sizeof("-2147483648") - 1)
+#define SSTR_INT64_LEN (sizeof("-9223372036854775808") - 1)
+
+#define SSTR_MAX_UINT32_VALUE (uint32_t)0xffffffff
+#define SSTR_MAX_INT32_VALUE (uint32_t)0x7fffffff
+
+static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,
+                                       uint64_t ui64, unsigned char zero,
+                                       unsigned int hexadecimal,
+                                       unsigned width) {
+    unsigned char *p, temp[SSTR_INT64_LEN + 1];
+    size_t len;
+    uint32_t ui32;
+    static unsigned char hex[] = "0123456789abcdef";
+    static unsigned char HEX[] = "0123456789ABCDEF";
+
+    p = temp + SSTR_INT64_LEN;
+
+    if (hexadecimal == 0) {
+        if (ui64 <= (uint64_t)SSTR_MAX_UINT32_VALUE) {
+            ui32 = (uint32_t)ui64;
+
+            do {
+                *--p = (unsigned char)(ui32 % 10 + '0');
+            } while (ui32 /= 10);
+
+        } else {
+            do {
+                *--p = (unsigned char)(ui64 % 10 + '0');
+            } while (ui64 /= 10);
+        }
+
+    } else if (hexadecimal == 1) {
+        do {
+            *--p = hex[(uint32_t)(ui64 & 0xf)];
+        } while (ui64 >>= 4);
+
+    } else { /* hexadecimal == 2 */
+
+        do {
+            *--p = HEX[(uint32_t)(ui64 & 0xf)];
+        } while (ui64 >>= 4);
+    }
+
+    /* zero or space padding */
+
+    len = (temp + SSTR_INT64_LEN) - p;
+
+    while (len++ < width && buf < last) {
+        *buf++ = zero;
+    }
+
+    /* number safe copy */
+
+    len = (temp + SSTR_INT64_LEN) - p;
+
+    if (buf + len > last) {
+        len = last - buf;
+    }
+
+    memcpy(buf, p, len);
+    buf += len;
+    return buf;
 }

@@ -10,16 +10,13 @@
 #include <time.h>
 
 #define SHORT_STR_CAPACITY 17
+#define CAP_ADD_DELTA 256
 
 struct sstr_s {
     size_t length;
-    union {
-        char short_str[SHORT_STR_CAPACITY + 1];
-        struct {
-            char* long_str;
-            size_t long_str_cap;
-        };
-    };
+    char short_str[SHORT_STR_CAPACITY + 1];
+    char* long_str;
+    size_t long_str_cap;
 };
 #define STR struct sstr_s
 
@@ -33,8 +30,11 @@ sstr_t sstr_new() {
 }
 
 void sstr_free(sstr_t s) {
+    if (s == NULL) {
+        return;
+    }
     STR* ss = (STR*)s;
-    if (STR_SHORT_P(ss) && ss->long_str) {
+    if (!STR_SHORT_P(ss)) {
         free(ss->long_str);
     }
     free(s);
@@ -45,11 +45,12 @@ sstr_t sstr_of(const void* data, size_t length) {
     if (length <= SHORT_STR_CAPACITY) {
         memcpy(s->short_str, data, length);
     } else {
-        s->long_str = (char*)realloc((void*)data, length + 1);
+        s->long_str = (char*)malloc(length + 1);
+        memcpy(s->long_str, data, length);
         s->long_str_cap = length;
     }
     s->length = length;
-    s->short_str[s->length] = '\0';
+    STR_PTR(s)[length] = 0;
     return s;
 }
 
@@ -73,11 +74,37 @@ int sstr_compare(sstr_t a, sstr_t b) {
     return alen > blen;
 }
 
+int sstr_compare_c(sstr_t a, const char* b) {
+    size_t alen = sstr_length(a), blen = strlen(b);
+    size_t minlen = alen;
+    if (minlen > blen) {
+        minlen = blen;
+    }
+
+    int c = memcmp(STR_PTR(a), b, minlen);
+    if (c != 0) {
+        return c;
+    }
+    return alen > blen;
+}
+
 void sstr_append_zero(sstr_t s, size_t length) {
     STR* ss = (STR*)s;
+
     if (STR_SHORT_P(s)) {
-        if (SHORT_STR_CAPACITY - ss->length > length) {
+        if (ss->length + length <= SHORT_STR_CAPACITY) {
             memset(ss->short_str + ss->length, 0, length + 1);
+            ss->length += length;
+            return;
+        } else {
+            if (ss->long_str) {
+                free(ss->long_str);
+            }
+            ss->long_str =
+                (char*)malloc(length + ss->length + CAP_ADD_DELTA + 1);
+            ss->long_str_cap = length + ss->length + CAP_ADD_DELTA;
+            memcpy(ss->long_str, ss->short_str, ss->length);
+            memset(ss->long_str + ss->length, 0, length + 1);
             ss->length += length;
             return;
         }
@@ -86,22 +113,28 @@ void sstr_append_zero(sstr_t s, size_t length) {
             memset(ss->long_str + ss->length, 0, length + 1);
             ss->length += length;
             return;
+        } else {
+            ss->long_str = (char*)realloc(
+                STR_PTR(s), length + ss->length + CAP_ADD_DELTA + 1);
+            memset(ss->long_str + ss->length, 0, length + 1);
+            ss->length += length;
+            return;
         }
     }
-    ss->long_str = (char*)realloc(STR_PTR(s), length + ss->length + 1);
-    memset(ss->long_str + ss->length, 0, length + 1);
-    ss->length += length;
 }
 
 void sstr_append_of(sstr_t s, const void* data, size_t length) {
     size_t oldlen = sstr_length(s);
     sstr_append_zero(s, length);
     memcpy(STR_PTR(s) + oldlen, data, length);
+    STR_PTR(s)[sstr_length(s)] = '\0';
 }
 
 void sstr_append(sstr_t dst, sstr_t src) {
     sstr_append_of(dst, STR_PTR(src), sstr_length(src));
 }
+
+sstr_t sstr_dup(sstr_t s) { return sstr_of(STR_PTR(s), sstr_length(s)); }
 
 sstr_t sstr_substr(sstr_t s, size_t index, size_t len) {
     size_t minlen = len;
@@ -112,22 +145,19 @@ sstr_t sstr_substr(sstr_t s, size_t index, size_t len) {
     return sstr_of(STR_PTR(s) + index, minlen);
 }
 
-unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
-                              const char* fmt, va_list args);
 static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,
                                        uint64_t ui64, unsigned char zero,
                                        unsigned int hexadecimal,
                                        unsigned width);
 
-unsigned char* sstr_snprintf(unsigned char* buf, size_t buf_size,
-                             const char* fmt, ...) {
-    unsigned char* p;
+sstr_t sstr_printf(size_t buf_size, const char* fmt, ...) {
     va_list args;
+    sstr_t res;
 
     va_start(args, fmt);
-    p = sstr_vslprintf(buf, buf + buf_size, fmt, args);
+    res = sstr_vslprintf(fmt, args);
     va_end(args);
-    return p;
+    return res;
 }
 
 #define _MAX(x, y) (((x) > (y)) ? (x) : (y))
@@ -139,25 +169,24 @@ unsigned char* sstr_snprintf(unsigned char* buf, size_t buf_size,
 #ifndef ssize_t
 #define ssize_t int64_t
 #endif
-unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
-                              const char* fmt, va_list args) {
+
+sstr_t sstr_vslprintf(const char* fmt, va_list args) {
     unsigned char *p, zero;
     int d;
     double f;
-    size_t len, slen;
+    size_t slen;
     int64_t i64;
     uint64_t ui64, frac;
     unsigned int width, sign, hex, frac_width, scale, n;
     STR* S;
     /* a default d after %..x/u  */
     int df_d;
+    struct sstr_s* buf = NULL;
+    unsigned char tmp[100];
+    unsigned char* ptmp;
+    buf = (STR*)sstr_new();
 
-    while (*fmt && buf < last) {
-        /*
-         * "buf < last" means that we could copy at least one character:
-         * the plain character, "%%", "%c", and minus without the checking
-         */
-
+    while (*fmt) {
         if (*fmt == '%') {
             i64 = 0;
             ui64 = 0;
@@ -220,10 +249,13 @@ unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
             switch (*fmt) {
                 case 'S':
                     S = va_arg(args, STR*);
+                    if (S == NULL) {
+                        p = (unsigned char*)"NULL";
+                        sstr_append_of(buf, p, 4);
+                    } else {
+                        sstr_append(buf, S);
+                    }
 
-                    len = _MIN(((size_t)(last - buf)), S->length);
-                    memcpy(buf, STR_PTR(S), len);
-                    buf += len;
                     fmt++;
 
                     continue;
@@ -236,13 +268,9 @@ unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
                     }
 
                     if (slen == (size_t)-1) {
-                        while (*p && buf < last) {
-                            *buf++ = *p++;
-                        }
-
+                        sstr_append_of(buf, p, strlen((char*)p));
                     } else {
-                        len = _MIN(((size_t)(last - buf)), slen);
-                        buf = (unsigned char*)memcpy(buf, p, len);
+                        sstr_append_of(buf, p, slen);
                     }
 
                     fmt++;
@@ -304,7 +332,7 @@ unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
                     f = va_arg(args, double);
 
                     if (f < 0) {
-                        *buf++ = '-';
+                        sstr_append_of(buf, "-", 1);
                         f = -f;
                     }
 
@@ -325,15 +353,15 @@ unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
                         }
                     }
 
-                    buf = sstr_sprintf_num(buf, last, ui64, zero, 0, width);
+                    ptmp = sstr_sprintf_num(tmp, tmp + sizeof(tmp), ui64, zero,
+                                            0, width);
+                    sstr_append_of(buf, tmp, ptmp - tmp);
 
                     if (frac_width) {
-                        if (buf < last) {
-                            *buf++ = '.';
-                        }
-
-                        buf = sstr_sprintf_num(buf, last, frac, '0', 0,
-                                               frac_width);
+                        sstr_append_of(buf, ".", 1);
+                        ptmp = sstr_sprintf_num(tmp, tmp + sizeof(tmp), frac,
+                                                '0', 0, frac_width);
+                        sstr_append_of(buf, tmp, ptmp - tmp);
                     }
 
                     fmt++;
@@ -350,25 +378,25 @@ unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
 
                 case 'c':
                     d = va_arg(args, int);
-                    *buf++ = (unsigned char)(d & 0xff);
+                    sstr_append_of(buf, (unsigned char*)&d, 1);
                     fmt++;
 
                     continue;
 
                 case 'Z':
-                    *buf++ = '\0';
+                    sstr_append_of(buf, (unsigned char*)"\0", 1);
                     fmt++;
 
                     continue;
 
                 case 'N':
-                    *buf++ = LF;
+                    sstr_append_of(buf, (unsigned char*)"\n", 1);
                     fmt++;
 
                     continue;
 
                 case '%':
-                    *buf++ = '%';
+                    sstr_append_of(buf, (unsigned char*)"%", 1);
                     fmt++;
 
                     continue;
@@ -382,14 +410,14 @@ unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
                         }
                         break;
                     }
-                    if (*fmt) *buf++ = *fmt++;
+                    if (*fmt) sstr_append_of(buf, fmt++, 1);
 
                     continue;
             }
 
             if (sign) {
                 if (i64 < 0) {
-                    *buf++ = '-';
+                    sstr_append_of(buf, "-", 1);
                     ui64 = (uint64_t)-i64;
 
                 } else {
@@ -397,20 +425,20 @@ unsigned char* sstr_vslprintf(unsigned char* buf, unsigned char* last,
                 }
             }
 
-            buf = sstr_sprintf_num(buf, last, ui64, zero, hex, width);
+            ptmp = sstr_sprintf_num(tmp, tmp + sizeof(tmp), ui64, zero, hex,
+                                    width);
+            sstr_append_of(buf, tmp, ptmp - tmp);
 
             if (df_d && *fmt) {  // %xabc not %xd, move a to buf
-                *buf++ = *fmt++;
+                sstr_append_of(buf, fmt++, 1);
             } else if (*fmt) {
                 fmt++;
             }
 
         } else {
-            *buf++ = *fmt++;
+            sstr_append_of(buf, fmt++, 1);
         }
     }
-
-    *buf = 0;
 
     return buf;
 }

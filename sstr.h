@@ -1,6 +1,12 @@
+/**
+ * @file sstr.h
+ * @brief simple string implement
+ */
+
 #ifndef SSTR_H_
 #define SSTR_H_
 
+#include <stdarg.h>
 #include <stddef.h>
 
 #ifdef __cplusplus
@@ -61,8 +67,8 @@ char* sstr_cstr(sstr_t s);
 size_t sstr_length(sstr_t s);
 
 /**
- * @brief Compare \a and \b
- *        return 0 if equal, <0 if \a < \b, >0 if \a > \b.
+ * @brief Compare \a a and \a b
+ *        return 0 if equal, <0 if \a a < \a b, >0 if \a a > \a b.
  *
  * @param a sstr_t to be compared.
  * @param b sstr_t to be compared to.
@@ -70,6 +76,13 @@ size_t sstr_length(sstr_t s);
  * @note This function is case sensitive.
  */
 int sstr_compare(sstr_t a, sstr_t b);
+
+/**
+ * @brief compare sstr_t \a a and \a c-style string b
+ *
+ * @return int
+ */
+int sstr_compare_c(sstr_t a, const char* b);
 
 /**
  * @brief Append \a length byte of '\0' to \a s.
@@ -97,6 +110,14 @@ void sstr_append_of(sstr_t s, const void* data, size_t length);
 void sstr_append(sstr_t dst, sstr_t src);
 
 /**
+ * @brief Duplicate \a s and return
+ *
+ * @param s sstr_t to duplicate.
+ * @return sstr_t  duplicate of \a s.
+ */
+sstr_t sstr_dup(sstr_t s);
+
+/**
  * @brief Get substring of \a s starting at \a index with \a length bytes.
  *
  * @param s sstr_t instance to get substring of.
@@ -110,31 +131,30 @@ sstr_t sstr_substr(sstr_t s, size_t index, size_t len);
  * @brief Printf implement.
  *
  * supported formats:
- *    %[0][width]T              time_t
- *    %[0][width][u][x|X]z      ssize_t/size_t
- *    %[0][width][u][x|X]d      int/u_int
- *    %[0][width][u][x|X]l      long
- *    %[0][width][u][x|X]D      int32_t/uint32_t
- *    %[0][width][u][x|X]L      int64_t/uint64_t
- *    %[0][width][.width]f      double, max valid number fits to %18.15f
- *    %p                        void *
- *    %S                        sstr_t
- *    %s                        null-terminated string
- *    %*s                       length and string
- *    %Z                        '\0'
- *    %N                        '\n'
- *    %c                        char
- *    %%                        %
+ *
+ *   - %[0][width]T              time_t
+ *   - %[0][width][u][x|X]z      ssize_t/size_t
+ *   - %[0][width][u][x|X]d      int/u_int
+ *   - %[0][width][u][x|X]l      long
+ *   - %[0][width][u][x|X]D      int32_t/uint32_t
+ *   - %[0][width][u][x|X]L      int64_t/uint64_t
+ *   - %[0][width][.width]f      double, max valid number fits to %18.15f
+ *   - %p                        void *
+ *   - %S                        sstr_t
+ *   - %s                        null-terminated string
+ *   - %*s                       length and string
+ *   - %Z                        '\0'
+ *   - %N                        '\n'
+ *   - %c                        char
+ *   - %%                        %
  *
  *  reserved:
- *    %S                        null-terminated wchar string
- *    %C                        wchar
+ *   - %C                        wchar
  *
  *  if %u/%x/%X, tailing d can be ignore
  */
-
-unsigned char* sstr_snprintf(unsigned char* buf, size_t buf_size,
-                             const char* fmt, ...);
+sstr_t sstr_vslprintf(const char* fmt, va_list args);
+sstr_t sstr_printf(size_t buf_size, const char* fmt, ...);
 
 #ifdef __cplusplus
 }

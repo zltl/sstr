@@ -154,7 +154,15 @@ sstr_t sstr_substr(sstr_t s, size_t index, size_t len);
  *  if %u/%x/%X, tailing d can be ignore
  */
 sstr_t sstr_vslprintf(const char* fmt, va_list args);
-sstr_t sstr_printf(size_t buf_size, const char* fmt, ...);
+
+/**
+ * @brief printf implement.
+ *
+ * @param fmt format, like C printf()
+ * @param ... arguments, like C printf()
+ * @return sstr_t result string.
+ */
+sstr_t sstr_printf(const char* fmt, ...);
 
 #ifdef __cplusplus
 }

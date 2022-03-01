@@ -150,7 +150,7 @@ static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,
                                        unsigned int hexadecimal,
                                        unsigned width);
 
-sstr_t sstr_printf(size_t buf_size, const char* fmt, ...) {
+sstr_t sstr_printf(const char* fmt, ...) {
     va_list args;
     sstr_t res;
 

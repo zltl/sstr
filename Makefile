@@ -34,7 +34,7 @@ clean:
 doxygen:
 	if [ ! -d target/doxygen-awesome-css ]; then
 		mkdir -p target
-		git clone --depth=1 git@github.com:jothepro/doxygen-awesome-css.git target/doxygen-awesome-css
+		git clone --depth=1 https://github.com/jothepro/doxygen-awesome-css.git target/doxygen-awesome-css
 	fi
 	doxygen doxygen/Doxyfile
 	mkdir -p docs

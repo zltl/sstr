@@ -37,3 +37,5 @@ doxygen:
 		git clone --depth=1 git@github.com:jothepro/doxygen-awesome-css.git target/doxygen-awesome-css
 	fi
 	doxygen doxygen/Doxyfile
+	mkdir -p docs
+	cp -rf doc/html/* docs/

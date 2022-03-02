@@ -1,19 +1,5 @@
 /**
  * @file sstr.h
- * @brief simple string implement
- */
-
-#ifndef SSTR_H_
-#define SSTR_H_
-
-#include <stdarg.h>
-#include <stddef.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/**
  * @brief sstr_t are objects that represent sequences of characters.
  * @details The standard C style string is a sequence of characters terminated
  * by a null character, which is easy to cause buffer overflow. And it's
@@ -38,12 +24,26 @@ extern "C" {
  *     sstr_free(s2);
  *
  *     sstr_t result = sstr_printf("stotal=%S, c-str=%s, int=%d, long=%ld",
- * stotal, stotal, 123, (long)456);
+ *         stotal, stotal, 123, (long)456);
  *
- *     print(sstr_cstr(result));
+ *     puts(sstr_cstr(result));
  *
  *     sstr_free(result);
  *     sstr_free(stotal);
+ */
+
+#ifndef SSTR_H_
+#define SSTR_H_
+
+#include <stdarg.h>
+#include <stddef.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief sstr_t are objects that represent sequences of characters.
  */
 typedef void* sstr_t;
 

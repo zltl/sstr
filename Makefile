@@ -1,4 +1,5 @@
-.PHONY: clean example objs
+.PHONY: clean example objs doxygen
+.ONESHELL:
 
 TARGET_DIR ?=
 
@@ -30,3 +31,9 @@ $(TARGET_DIR)/example/example: $(TARGET_DIR)/example/example.c.o $(TARGET_DIR)/s
 clean:
 	rm -rf $(TARGET_DIR)
 
+doxygen:
+	if [ ! -d target/doxygen-awesome-css ]; then
+		mkdir -p target
+		git clone --depth=1 git@github.com:jothepro/doxygen-awesome-css.git target/doxygen-awesome-css
+	fi
+	doxygen doxygen/Doxyfile

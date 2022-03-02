@@ -88,7 +88,10 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">sstr </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://github.com/zltl/sstr">View sstr on GitHub</a></p>
+<div class="textblock"><ul>
+<li><a href="https://github.com/zltl/sstr">View sstr on GitHub</a></li>
+<li><a href="https://zltl.github.io/sstr/">Document</a></li>
+</ul>
 <p><code>sstr_t</code> are objects that represent sequences of characters. The standard C style string is a sequence of characters terminated by a null character, which is easy to cause buffer overflow. And it's annoying to pass pointer and length of string to every whare.</p>
 <p>The sequence of characters just like a string in C++, inside the sstr_t struct, it also has a null character at the end, so that we can use sstr_t as a C style string.</p>
 <p>sstr_t contains a pointer to char sequence and its length, solves the security problems of standard C string. With functions bundle with sstr_t, you can easily manipulate the string just like standard C string, but in a safer way:</p>

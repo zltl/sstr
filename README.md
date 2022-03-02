@@ -1,6 +1,8 @@
 sstr
 --- 
 
+[View sstr on GitHub](https://github.com/zltl/sstr)
+
 `sstr_t` are objects that represent sequences of characters.
 The standard C style string is a sequence of characters terminated
 by a null character, which is easy to cause buffer overflow. And it's

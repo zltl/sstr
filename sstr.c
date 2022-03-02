@@ -436,7 +436,11 @@ sstr_t sstr_vslprintf(const char* fmt, va_list args) {
             }
 
         } else {
-            sstr_append_of(buf, fmt++, 1);
+            ptmp = (unsigned char*)fmt;
+            while (*fmt && (*fmt) != '%') {
+                fmt++;
+            }
+            sstr_append_of(buf, ptmp, (unsigned char*)fmt - ptmp);
         }
     }
 

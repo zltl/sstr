@@ -22,9 +22,6 @@ jobs:
       # 3. Create the doxygen pages.
       - name: Create the doxygen
         run: make doxygen
-      - name: Moving Files
-        run: |
-          mv ./core/build/docs/api-docs ./api
       # Deploy to GitHub Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

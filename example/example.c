@@ -1,3 +1,7 @@
+/**
+ * @file example.c
+ * @brief example of sstr_t
+ */
 #include <stdio.h>
 
 #include "sstr.h"
@@ -12,8 +16,9 @@ int main() {
     sstr_free(s1);
     sstr_free(s2);
 
-    sstr_t result = sstr_printf("stotal=%S, c-str=%s, int=%d, long=0x%ux", stotal,
-                                "this is c str", 123, (unsigned long)0x456);
+    sstr_t result =
+        sstr_printf("stotal=%S, c-str=%s, int=%d, long=0x%ux", stotal,
+                    "this is c str", 123, (unsigned long)0x456);
 
     puts(sstr_cstr(result));
 

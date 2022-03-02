@@ -1,7 +1,8 @@
 sstr
 --- 
 
-[View sstr on GitHub](https://github.com/zltl/sstr)
+- [View sstr on GitHub](https://github.com/zltl/sstr)
+- [Document](https://zltl.github.io/sstr/)
 
 `sstr_t` are objects that represent sequences of characters.
 The standard C style string is a sequence of characters terminated

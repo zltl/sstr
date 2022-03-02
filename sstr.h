@@ -220,6 +220,13 @@ sstr_t sstr_vslprintf(const char* fmt, va_list args);
  */
 sstr_t sstr_printf(const char* fmt, ...);
 
+/**
+ * @brief return version string.
+ *
+ * @return const char* static version string.
+ */
+const char* sstr_version();
+
 #ifdef __cplusplus
 }
 #endif

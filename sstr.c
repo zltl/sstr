@@ -1,3 +1,8 @@
+/**
+ * @file sstr.c
+ * @brief Implementation of the sstr.h header file.
+ */
+
 #include "sstr.h"
 
 #include <malloc.h>

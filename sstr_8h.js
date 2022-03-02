@@ -15,5 +15,6 @@ var sstr_8h =
     [ "sstr_of", "sstr_8h.html#ad61027cdd29e89a0a946740cc04fcba2", null ],
     [ "sstr_printf", "sstr_8h.html#ab2d845cc91a348545e8f6b375437de6b", null ],
     [ "sstr_substr", "sstr_8h.html#a5ba343262041c4dc26b5c218c4cc9cb3", null ],
+    [ "sstr_version", "sstr_8h.html#a813f8f8071072a59b56881348bcc7b60", null ],
     [ "sstr_vslprintf", "sstr_8h.html#a024de0f2bca395ea91d6f8966adaedbe", null ]
 ];

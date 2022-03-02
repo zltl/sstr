@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>sstr: sstr.h File Reference</title>
+<title>sstr: sstr.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,7 +65,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('sstr_8h.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('sstr_8c.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -85,119 +85,150 @@ $(document).ready(function(){initNavTree('sstr_8h.html',''); initResizable(); })
 
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">sstr.h File Reference</div>  </div>
+<div class="title">sstr.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>sstr_t are objects that represent sequences of characters.  
+<p>Implementation of the <a class="el" href="sstr_8h.html" title="sstr_t are objects that represent sequences of characters.">sstr.h</a> header file.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdarg.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="sstr_8h_source.html">sstr.h</a>&quot;</code><br />
+<code>#include &lt;malloc.h&gt;</code><br />
+<code>#include &lt;stdarg.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for sstr.h:</div>
+Include dependency graph for sstr.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="sstr_8h__incl.png" border="0" usemap="#sstr_8h" alt=""/></div>
-<map name="sstr_8h" id="sstr_8h">
-<area shape="rect" title="sstr_t are objects that represent sequences of characters." alt="" coords="63,5,121,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,80,107"/>
-<area shape="rect" title=" " alt="" coords="104,80,179,107"/>
+<div class="center"><img src="sstr_8c__incl.png" border="0" usemap="#sstr_8c" alt=""/></div>
+<map name="sstr_8c" id="sstr_8c">
+<area shape="rect" title="Implementation of the sstr.h header file." alt="" coords="307,5,363,32"/>
+<area shape="rect" href="sstr_8h.html" title="sstr_t are objects that represent sequences of characters." alt="" coords="63,80,121,107"/>
+<area shape="rect" title=" " alt="" coords="5,155,80,181"/>
+<area shape="rect" title=" " alt="" coords="112,155,187,181"/>
+<area shape="rect" title=" " alt="" coords="197,80,275,107"/>
+<area shape="rect" title=" " alt="" coords="299,80,370,107"/>
+<area shape="rect" title=" " alt="" coords="395,80,461,107"/>
+<area shape="rect" title=" " alt="" coords="486,80,557,107"/>
+<area shape="rect" title=" " alt="" coords="581,80,651,107"/>
+<area shape="rect" title=" " alt="" coords="676,80,740,107"/>
 </map>
 </div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="sstr_8h__dep__incl.png" border="0" usemap="#sstr_8hdep" alt=""/></div>
-<map name="sstr_8hdep" id="sstr_8hdep">
-<area shape="rect" title="sstr_t are objects that represent sequences of characters." alt="" coords="69,5,126,32"/>
-<area shape="rect" href="sstr_8c.html" title="Implementation of the sstr.h header file." alt="" coords="5,80,61,107"/>
-<area shape="rect" href="example_8c.html" title="example of sstr_t" alt="" coords="86,80,237,107"/>
-</map>
-</div>
-</div>
-<p><a href="sstr_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a8d28a1ce0ac6dd8b8e50af6f78e735e7"><td class="memItemLeft" align="right" valign="top"><a id="a8d28a1ce0ac6dd8b8e50af6f78e735e7"></a>
-typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a></td></tr>
-<tr class="memdesc:a8d28a1ce0ac6dd8b8e50af6f78e735e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">sstr_t are objects that represent sequences of characters. <br /></td></tr>
-<tr class="separator:a8d28a1ce0ac6dd8b8e50af6f78e735e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsstr__s.html">sstr_s</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a97298722eedb753e63ca6742d6d07dea"><td class="memItemLeft" align="right" valign="top"><a id="a97298722eedb753e63ca6742d6d07dea"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SHORT_STR_CAPACITY</b>&#160;&#160;&#160;17</td></tr>
+<tr class="separator:a97298722eedb753e63ca6742d6d07dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50dfcc0842363a917b93d9a23e76a4cd"><td class="memItemLeft" align="right" valign="top"><a id="a50dfcc0842363a917b93d9a23e76a4cd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CAP_ADD_DELTA</b>&#160;&#160;&#160;256</td></tr>
+<tr class="separator:a50dfcc0842363a917b93d9a23e76a4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87f23f9d76e3a2d5658da8dae25f38c4"><td class="memItemLeft" align="right" valign="top"><a id="a87f23f9d76e3a2d5658da8dae25f38c4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>STR</b>&#160;&#160;&#160;struct <a class="el" href="structsstr__s.html">sstr_s</a></td></tr>
+<tr class="separator:a87f23f9d76e3a2d5658da8dae25f38c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a801992bb561d8715144c769a95313676"><td class="memItemLeft" align="right" valign="top"><a id="a801992bb561d8715144c769a95313676"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>STR_SHORT_P</b>(s)&#160;&#160;&#160;(((STR*)s)-&gt;length &lt;= SHORT_STR_CAPACITY)</td></tr>
+<tr class="separator:a801992bb561d8715144c769a95313676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a874d13738c4489b634cdc29e969a5e"><td class="memItemLeft" align="right" valign="top"><a id="a6a874d13738c4489b634cdc29e969a5e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>STR_PTR</b>(s)&#160;&#160;&#160;(STR_SHORT_P(s) ? ((STR*)s)-&gt;short_str : ((STR*)s)-&gt;long_str)</td></tr>
+<tr class="separator:a6a874d13738c4489b634cdc29e969a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a061a4c77020563f79e264fc9cac147"><td class="memItemLeft" align="right" valign="top"><a id="a0a061a4c77020563f79e264fc9cac147"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>_MAX</b>(x,  y)&#160;&#160;&#160;(((x) &gt; (y)) ? (x) : (y))</td></tr>
+<tr class="separator:a0a061a4c77020563f79e264fc9cac147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6886747cfa236cb44cbc6870879ab6e7"><td class="memItemLeft" align="right" valign="top"><a id="a6886747cfa236cb44cbc6870879ab6e7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>_MIN</b>(x,  y)&#160;&#160;&#160;(((x) &lt; (y)) ? (x) : (y))</td></tr>
+<tr class="separator:a6886747cfa236cb44cbc6870879ab6e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a350c9d6cb81908d59427ee96844d1a9c"><td class="memItemLeft" align="right" valign="top"><a id="a350c9d6cb81908d59427ee96844d1a9c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LF</b>&#160;&#160;&#160;(unsigned char)'\n'</td></tr>
+<tr class="separator:a350c9d6cb81908d59427ee96844d1a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a876ce77f3c672c7162658151e648389e"><td class="memItemLeft" align="right" valign="top"><a id="a876ce77f3c672c7162658151e648389e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CR</b>&#160;&#160;&#160;(unsigned char)'\r'</td></tr>
+<tr class="separator:a876ce77f3c672c7162658151e648389e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cb23a858b0a21bdaa644b9181dc415f"><td class="memItemLeft" align="right" valign="top"><a id="a6cb23a858b0a21bdaa644b9181dc415f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CRLF</b>&#160;&#160;&#160;&quot;\r\n&quot;</td></tr>
+<tr class="separator:a6cb23a858b0a21bdaa644b9181dc415f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8af93bbb66534e14d651bbb0638ee796"><td class="memItemLeft" align="right" valign="top"><a id="a8af93bbb66534e14d651bbb0638ee796"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ssize_t</b>&#160;&#160;&#160;int64_t</td></tr>
+<tr class="separator:a8af93bbb66534e14d651bbb0638ee796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7880ba322b4f372434e57d33760a35f4"><td class="memItemLeft" align="right" valign="top"><a id="a7880ba322b4f372434e57d33760a35f4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSTR_INT32_LEN</b>&#160;&#160;&#160;(sizeof(&quot;-2147483648&quot;) - 1)</td></tr>
+<tr class="separator:a7880ba322b4f372434e57d33760a35f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a76558da60fd3a27873572fa6632fb5"><td class="memItemLeft" align="right" valign="top"><a id="a3a76558da60fd3a27873572fa6632fb5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSTR_INT64_LEN</b>&#160;&#160;&#160;(sizeof(&quot;-9223372036854775808&quot;) - 1)</td></tr>
+<tr class="separator:a3a76558da60fd3a27873572fa6632fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a871e54596b3a3821e48d81c76a95aa99"><td class="memItemLeft" align="right" valign="top"><a id="a871e54596b3a3821e48d81c76a95aa99"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSTR_MAX_UINT32_VALUE</b>&#160;&#160;&#160;(uint32_t)0xffffffff</td></tr>
+<tr class="separator:a871e54596b3a3821e48d81c76a95aa99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ae7bde3cb61f8971f46dd52e71aa5d9"><td class="memItemLeft" align="right" valign="top"><a id="a8ae7bde3cb61f8971f46dd52e71aa5d9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSTR_MAX_INT32_VALUE</b>&#160;&#160;&#160;(uint32_t)0x7fffffff</td></tr>
+<tr class="separator:a8ae7bde3cb61f8971f46dd52e71aa5d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae04c530ce9fbdb9b517ca74ab5f3edbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ae04c530ce9fbdb9b517ca74ab5f3edbc">sstr_new</a> ()</td></tr>
-<tr class="memdesc:ae04c530ce9fbdb9b517ca74ab5f3edbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an empty sstr_t.  <a href="sstr_8h.html#ae04c530ce9fbdb9b517ca74ab5f3edbc">More...</a><br /></td></tr>
+<tr class="memitem:ae04c530ce9fbdb9b517ca74ab5f3edbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#ae04c530ce9fbdb9b517ca74ab5f3edbc">sstr_new</a> ()</td></tr>
+<tr class="memdesc:ae04c530ce9fbdb9b517ca74ab5f3edbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an empty sstr_t.  <a href="sstr_8c.html#ae04c530ce9fbdb9b517ca74ab5f3edbc">More...</a><br /></td></tr>
 <tr class="separator:ae04c530ce9fbdb9b517ca74ab5f3edbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae99d652d5a9d25fc79343d2ac18cb0e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ae99d652d5a9d25fc79343d2ac18cb0e5">sstr_free</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
-<tr class="memdesc:ae99d652d5a9d25fc79343d2ac18cb0e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete a sstr_t.  <a href="sstr_8h.html#ae99d652d5a9d25fc79343d2ac18cb0e5">More...</a><br /></td></tr>
+<tr class="memitem:ae99d652d5a9d25fc79343d2ac18cb0e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#ae99d652d5a9d25fc79343d2ac18cb0e5">sstr_free</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
+<tr class="memdesc:ae99d652d5a9d25fc79343d2ac18cb0e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete a sstr_t.  <a href="sstr_8c.html#ae99d652d5a9d25fc79343d2ac18cb0e5">More...</a><br /></td></tr>
 <tr class="separator:ae99d652d5a9d25fc79343d2ac18cb0e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad61027cdd29e89a0a946740cc04fcba2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ad61027cdd29e89a0a946740cc04fcba2">sstr_of</a> (const void *data, size_t length)</td></tr>
-<tr class="memdesc:ad61027cdd29e89a0a946740cc04fcba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from <em>data</em> with <em>length</em> bytes.  <a href="sstr_8h.html#ad61027cdd29e89a0a946740cc04fcba2">More...</a><br /></td></tr>
+<tr class="memitem:ad61027cdd29e89a0a946740cc04fcba2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#ad61027cdd29e89a0a946740cc04fcba2">sstr_of</a> (const void *data, size_t length)</td></tr>
+<tr class="memdesc:ad61027cdd29e89a0a946740cc04fcba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from <em>data</em> with <em>length</em> bytes.  <a href="sstr_8c.html#ad61027cdd29e89a0a946740cc04fcba2">More...</a><br /></td></tr>
 <tr class="separator:ad61027cdd29e89a0a946740cc04fcba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3b3c1563041f1323542f3e84f7817b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#aa3b3c1563041f1323542f3e84f7817b1">sstr</a> (const char *cstr)</td></tr>
-<tr class="memdesc:aa3b3c1563041f1323542f3e84f7817b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from C-style (NULL-terminated) string <em>str</em>.  <a href="sstr_8h.html#aa3b3c1563041f1323542f3e84f7817b1">More...</a><br /></td></tr>
+<tr class="memitem:aa3b3c1563041f1323542f3e84f7817b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#aa3b3c1563041f1323542f3e84f7817b1">sstr</a> (const char *cstr)</td></tr>
+<tr class="memdesc:aa3b3c1563041f1323542f3e84f7817b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from C-style (NULL-terminated) string <em>str</em>.  <a href="sstr_8c.html#aa3b3c1563041f1323542f3e84f7817b1">More...</a><br /></td></tr>
 <tr class="separator:aa3b3c1563041f1323542f3e84f7817b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82ec436753ebe2424b3248ef2bad0dd3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a82ec436753ebe2424b3248ef2bad0dd3">sstr_cstr</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
-<tr class="memdesc:a82ec436753ebe2424b3248ef2bad0dd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return C-style string representation of <em>s</em>.  <a href="sstr_8h.html#a82ec436753ebe2424b3248ef2bad0dd3">More...</a><br /></td></tr>
+<tr class="memitem:a82ec436753ebe2424b3248ef2bad0dd3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#a82ec436753ebe2424b3248ef2bad0dd3">sstr_cstr</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
+<tr class="memdesc:a82ec436753ebe2424b3248ef2bad0dd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return C-style string representation of <em>s</em>.  <a href="sstr_8c.html#a82ec436753ebe2424b3248ef2bad0dd3">More...</a><br /></td></tr>
 <tr class="separator:a82ec436753ebe2424b3248ef2bad0dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a196f7aa3191fda9c118547caddd7b682"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a196f7aa3191fda9c118547caddd7b682">sstr_length</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
-<tr class="memdesc:a196f7aa3191fda9c118547caddd7b682"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the length of <em>s</em>, in terms of bytes.  <a href="sstr_8h.html#a196f7aa3191fda9c118547caddd7b682">More...</a><br /></td></tr>
+<tr class="memitem:a196f7aa3191fda9c118547caddd7b682"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#a196f7aa3191fda9c118547caddd7b682">sstr_length</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
+<tr class="memdesc:a196f7aa3191fda9c118547caddd7b682"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the length of <em>s</em>, in terms of bytes.  <a href="sstr_8c.html#a196f7aa3191fda9c118547caddd7b682">More...</a><br /></td></tr>
 <tr class="separator:a196f7aa3191fda9c118547caddd7b682"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad27f624aa62f1f648e96cc195da7412f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ad27f624aa62f1f648e96cc195da7412f">sstr_compare</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> a, <a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> b)</td></tr>
-<tr class="memdesc:ad27f624aa62f1f648e96cc195da7412f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare <em>a</em> and <em>b</em> return 0 if equal, &lt;0 if <em>a</em> &lt; <em>b</em>, &gt;0 if <em>a</em> &gt; <em>b</em>.  <a href="sstr_8h.html#ad27f624aa62f1f648e96cc195da7412f">More...</a><br /></td></tr>
+<tr class="memitem:ad27f624aa62f1f648e96cc195da7412f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#ad27f624aa62f1f648e96cc195da7412f">sstr_compare</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> a, <a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> b)</td></tr>
+<tr class="memdesc:ad27f624aa62f1f648e96cc195da7412f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare <em>a</em> and <em>b</em> return 0 if equal, &lt;0 if <em>a</em> &lt; <em>b</em>, &gt;0 if <em>a</em> &gt; <em>b</em>.  <a href="sstr_8c.html#ad27f624aa62f1f648e96cc195da7412f">More...</a><br /></td></tr>
 <tr class="separator:ad27f624aa62f1f648e96cc195da7412f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4925de2352444a8822843cbbac5ae3ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a4925de2352444a8822843cbbac5ae3ed">sstr_compare_c</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> a, const char *b)</td></tr>
-<tr class="memdesc:a4925de2352444a8822843cbbac5ae3ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">compare sstr_t <em>a</em> and <em>c-style</em> string b  <a href="sstr_8h.html#a4925de2352444a8822843cbbac5ae3ed">More...</a><br /></td></tr>
+<tr class="memitem:a4925de2352444a8822843cbbac5ae3ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#a4925de2352444a8822843cbbac5ae3ed">sstr_compare_c</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> a, const char *b)</td></tr>
+<tr class="memdesc:a4925de2352444a8822843cbbac5ae3ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">compare sstr_t <em>a</em> and <em>c-style</em> string b  <a href="sstr_8c.html#a4925de2352444a8822843cbbac5ae3ed">More...</a><br /></td></tr>
 <tr class="separator:a4925de2352444a8822843cbbac5ae3ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affb41a505a69f235d647bec5f96165f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#affb41a505a69f235d647bec5f96165f8">sstr_append_zero</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, size_t length)</td></tr>
-<tr class="memdesc:affb41a505a69f235d647bec5f96165f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends the sstr_t by appending additional '\0' characters at the end of its current value.  <a href="sstr_8h.html#affb41a505a69f235d647bec5f96165f8">More...</a><br /></td></tr>
+<tr class="memitem:affb41a505a69f235d647bec5f96165f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#affb41a505a69f235d647bec5f96165f8">sstr_append_zero</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, size_t length)</td></tr>
+<tr class="memdesc:affb41a505a69f235d647bec5f96165f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends the sstr_t by appending additional '\0' characters at the end of its current value.  <a href="sstr_8c.html#affb41a505a69f235d647bec5f96165f8">More...</a><br /></td></tr>
 <tr class="separator:affb41a505a69f235d647bec5f96165f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab55b8f697e21006921e191ca25dbcec5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ab55b8f697e21006921e191ca25dbcec5">sstr_append_of</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, const void *data, size_t length)</td></tr>
-<tr class="memdesc:ab55b8f697e21006921e191ca25dbcec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends the sstr_t by appending additional characters in <em>data</em> with length of <em>length</em> at the end of its current value .  <a href="sstr_8h.html#ab55b8f697e21006921e191ca25dbcec5">More...</a><br /></td></tr>
+<tr class="memitem:ab55b8f697e21006921e191ca25dbcec5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#ab55b8f697e21006921e191ca25dbcec5">sstr_append_of</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, const void *data, size_t length)</td></tr>
+<tr class="memdesc:ab55b8f697e21006921e191ca25dbcec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends the sstr_t by appending additional characters in <em>data</em> with length of <em>length</em> at the end of its current value .  <a href="sstr_8c.html#ab55b8f697e21006921e191ca25dbcec5">More...</a><br /></td></tr>
 <tr class="separator:ab55b8f697e21006921e191ca25dbcec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8eb5ed3acc6d1f90c5097ab2f62672f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ad8eb5ed3acc6d1f90c5097ab2f62672f">sstr_append</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> dst, <a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> src)</td></tr>
-<tr class="memdesc:ad8eb5ed3acc6d1f90c5097ab2f62672f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends the sstr_t by appending additional characters contained in <em>src</em>.  <a href="sstr_8h.html#ad8eb5ed3acc6d1f90c5097ab2f62672f">More...</a><br /></td></tr>
+<tr class="memitem:ad8eb5ed3acc6d1f90c5097ab2f62672f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#ad8eb5ed3acc6d1f90c5097ab2f62672f">sstr_append</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> dst, <a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> src)</td></tr>
+<tr class="memdesc:ad8eb5ed3acc6d1f90c5097ab2f62672f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extends the sstr_t by appending additional characters contained in <em>src</em>.  <a href="sstr_8c.html#ad8eb5ed3acc6d1f90c5097ab2f62672f">More...</a><br /></td></tr>
 <tr class="separator:ad8eb5ed3acc6d1f90c5097ab2f62672f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87e2708071bfb86f3961788466c9192f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a87e2708071bfb86f3961788466c9192f">sstr_dup</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
-<tr class="memdesc:a87e2708071bfb86f3961788466c9192f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Duplicate <em>s</em> and return.  <a href="sstr_8h.html#a87e2708071bfb86f3961788466c9192f">More...</a><br /></td></tr>
+<tr class="memitem:a87e2708071bfb86f3961788466c9192f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#a87e2708071bfb86f3961788466c9192f">sstr_dup</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
+<tr class="memdesc:a87e2708071bfb86f3961788466c9192f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Duplicate <em>s</em> and return.  <a href="sstr_8c.html#a87e2708071bfb86f3961788466c9192f">More...</a><br /></td></tr>
 <tr class="separator:a87e2708071bfb86f3961788466c9192f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ba343262041c4dc26b5c218c4cc9cb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a5ba343262041c4dc26b5c218c4cc9cb3">sstr_substr</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, size_t index, size_t len)</td></tr>
-<tr class="memdesc:a5ba343262041c4dc26b5c218c4cc9cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get substring of <em>s</em> starting at <em>index</em> with <em>length</em> bytes.  <a href="sstr_8h.html#a5ba343262041c4dc26b5c218c4cc9cb3">More...</a><br /></td></tr>
+<tr class="memitem:a5ba343262041c4dc26b5c218c4cc9cb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#a5ba343262041c4dc26b5c218c4cc9cb3">sstr_substr</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, size_t index, size_t len)</td></tr>
+<tr class="memdesc:a5ba343262041c4dc26b5c218c4cc9cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get substring of <em>s</em> starting at <em>index</em> with <em>length</em> bytes.  <a href="sstr_8c.html#a5ba343262041c4dc26b5c218c4cc9cb3">More...</a><br /></td></tr>
 <tr class="separator:a5ba343262041c4dc26b5c218c4cc9cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a024de0f2bca395ea91d6f8966adaedbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a024de0f2bca395ea91d6f8966adaedbe">sstr_vslprintf</a> (const char *fmt, va_list args)</td></tr>
-<tr class="memdesc:a024de0f2bca395ea91d6f8966adaedbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Printf implement.  <a href="sstr_8h.html#a024de0f2bca395ea91d6f8966adaedbe">More...</a><br /></td></tr>
-<tr class="separator:a024de0f2bca395ea91d6f8966adaedbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2d845cc91a348545e8f6b375437de6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ab2d845cc91a348545e8f6b375437de6b">sstr_printf</a> (const char *fmt,...)</td></tr>
-<tr class="memdesc:ab2d845cc91a348545e8f6b375437de6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">printf implement.  <a href="sstr_8h.html#ab2d845cc91a348545e8f6b375437de6b">More...</a><br /></td></tr>
+<tr class="memitem:ab2d845cc91a348545e8f6b375437de6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#ab2d845cc91a348545e8f6b375437de6b">sstr_printf</a> (const char *fmt,...)</td></tr>
+<tr class="memdesc:ab2d845cc91a348545e8f6b375437de6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">printf implement.  <a href="sstr_8c.html#ab2d845cc91a348545e8f6b375437de6b">More...</a><br /></td></tr>
 <tr class="separator:ab2d845cc91a348545e8f6b375437de6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a813f8f8071072a59b56881348bcc7b60"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a813f8f8071072a59b56881348bcc7b60">sstr_version</a> ()</td></tr>
-<tr class="memdesc:a813f8f8071072a59b56881348bcc7b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">return version string.  <a href="sstr_8h.html#a813f8f8071072a59b56881348bcc7b60">More...</a><br /></td></tr>
+<tr class="memitem:a024de0f2bca395ea91d6f8966adaedbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#a024de0f2bca395ea91d6f8966adaedbe">sstr_vslprintf</a> (const char *fmt, va_list args)</td></tr>
+<tr class="memdesc:a024de0f2bca395ea91d6f8966adaedbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Printf implement.  <a href="sstr_8c.html#a024de0f2bca395ea91d6f8966adaedbe">More...</a><br /></td></tr>
+<tr class="separator:a024de0f2bca395ea91d6f8966adaedbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a813f8f8071072a59b56881348bcc7b60"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#a813f8f8071072a59b56881348bcc7b60">sstr_version</a> ()</td></tr>
+<tr class="memdesc:a813f8f8071072a59b56881348bcc7b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">return version string.  <a href="sstr_8c.html#a813f8f8071072a59b56881348bcc7b60">More...</a><br /></td></tr>
 <tr class="separator:a813f8f8071072a59b56881348bcc7b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>sstr_t are objects that represent sequences of characters. </p>
-<p>The standard C style string is a sequence of characters terminated by a null character, which is easy to cause buffer overflow. And it's annoying to pass pointer and length of string to every whare.</p>
-<p>The sequence of characters just like a string in C++, inside the sstr_t struct, it also has a null character at the end, so that we can use sstr_t as a C style string.</p>
-<p>sstr_t contains a pointer to char sequence and its length, solves the security problems of standard C string. With functions bundle with sstr_t, you can easily manipulate the string just like standard C string, but in a safer way: </p><pre class="fragment">sstr_t stotal = sstr_new();
-sstr_t s1 = sstr("hello");
-sstr_t s2 = sstr("world");
-sstr_append(stotal, s1);
-sstr_append_of(stotal, " ", 1);
-sstr_append(stotal, s2);
-sstr_free(s1);
-sstr_free(s2);
-
-sstr_t result = sstr_printf("stotal=%S, c-str=%s, int=%d, long=%ld",
-    stotal, stotal, 123, (long)456);
-
-puts(sstr_cstr(result));
-
-sstr_free(result);
-sstr_free(stotal);
-</pre> </div><h2 class="groupheader">Function Documentation</h2>
+<div class="textblock"><p>Implementation of the <a class="el" href="sstr_8h.html" title="sstr_t are objects that represent sequences of characters.">sstr.h</a> header file. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="aa3b3c1563041f1323542f3e84f7817b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa3b3c1563041f1323542f3e84f7817b1">&#9670;&nbsp;</a></span>sstr()</h2>
 
@@ -752,7 +783,7 @@ sstr_free(stotal);
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="sstr_8h.html">sstr.h</a></li>
+    <li class="navelem"><a class="el" href="sstr_8c.html">sstr.c</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

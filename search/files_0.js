@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sstr_2eh_20',['sstr.h',['../sstr_8h.html',1,'']]]
+  ['example_2ec_23',['example.c',['../example_8c.html',1,'']]]
 ];

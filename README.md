@@ -1,7 +1,6 @@
 sstr
 --- 
 
-- [View sstr on GitHub](https://github.com/zltl/sstr)
 - [Document](https://zltl.github.io/sstr/)
 
 `sstr_t` are objects that represent sequences of characters.

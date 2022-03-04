@@ -1,6 +1,8 @@
 sstr
 --- 
 
+[![C/C++ CI](https://github.com/zltl/sstr/actions/workflows/build-test.yml/badge.svg?branch=main)](https://github.com/zltl/sstr/actions/workflows/build-test.yml)
+
 - [Document](https://zltl.github.io/sstr/)
 
 `sstr_t` are objects that represent sequences of characters.

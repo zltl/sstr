@@ -280,9 +280,9 @@ sstr_t sstr_vslprintf(const char* fmt, va_list args) {
 
                 case 'z':
                     if (sign) {
-                        i64 = (int64_t)va_arg(args, int64_t);
+                        i64 = (int64_t)va_arg(args, long);
                     } else {
-                        ui64 = (uint64_t)va_arg(args, uint64_t);
+                        ui64 = (uint64_t)va_arg(args, unsigned long);
                     }
                     df_d = 0;
                     break;

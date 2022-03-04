@@ -165,16 +165,6 @@ sstr_t sstr_printf(const char* fmt, ...) {
     return res;
 }
 
-#define _MAX(x, y) (((x) > (y)) ? (x) : (y))
-#define _MIN(x, y) (((x) < (y)) ? (x) : (y))
-#define LF (unsigned char)'\n'
-#define CR (unsigned char)'\r'
-#define CRLF "\r\n"
-
-#ifndef ssize_t
-#define ssize_t int64_t
-#endif
-
 sstr_t sstr_vslprintf(const char* fmt, va_list args) {
     unsigned char *p, zero;
     int d;
@@ -290,9 +280,9 @@ sstr_t sstr_vslprintf(const char* fmt, va_list args) {
 
                 case 'z':
                     if (sign) {
-                        i64 = (int64_t)va_arg(args, ssize_t);
+                        i64 = (int64_t)va_arg(args, int64_t);
                     } else {
-                        ui64 = (uint64_t)va_arg(args, size_t);
+                        ui64 = (uint64_t)va_arg(args, uint64_t);
                     }
                     df_d = 0;
                     break;

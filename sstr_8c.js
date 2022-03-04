@@ -1,14 +1,8 @@
 var sstr_8c =
 [
     [ "sstr_s", "structsstr__s.html", "structsstr__s" ],
-    [ "_MAX", "sstr_8c.html#a0a061a4c77020563f79e264fc9cac147", null ],
-    [ "_MIN", "sstr_8c.html#a6886747cfa236cb44cbc6870879ab6e7", null ],
     [ "CAP_ADD_DELTA", "sstr_8c.html#a50dfcc0842363a917b93d9a23e76a4cd", null ],
-    [ "CR", "sstr_8c.html#a876ce77f3c672c7162658151e648389e", null ],
-    [ "CRLF", "sstr_8c.html#a6cb23a858b0a21bdaa644b9181dc415f", null ],
-    [ "LF", "sstr_8c.html#a350c9d6cb81908d59427ee96844d1a9c", null ],
     [ "SHORT_STR_CAPACITY", "sstr_8c.html#a97298722eedb753e63ca6742d6d07dea", null ],
-    [ "ssize_t", "sstr_8c.html#a8af93bbb66534e14d651bbb0638ee796", null ],
     [ "SSTR_INT32_LEN", "sstr_8c.html#a7880ba322b4f372434e57d33760a35f4", null ],
     [ "SSTR_INT64_LEN", "sstr_8c.html#a3a76558da60fd3a27873572fa6632fb5", null ],
     [ "SSTR_MAX_INT32_VALUE", "sstr_8c.html#a8ae7bde3cb61f8971f46dd52e71aa5d9", null ],

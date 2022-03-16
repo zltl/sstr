@@ -166,6 +166,15 @@ void sstr_append_of(sstr_t s, const void* data, size_t length);
 void sstr_append(sstr_t dst, sstr_t src);
 
 /**
+ * @brief Extends the sstr_t by appending additional characters contained in \a
+ * src.
+ *
+ * @param dst destination sstr_t.
+ * @param src source C-style string.
+ */
+void sstr_append_cstr(sstr_t dst, const char* src);
+
+/**
  * @brief Duplicate \a s and return.
  *
  * @param s sstr_t to duplicate.
@@ -182,6 +191,13 @@ sstr_t sstr_dup(sstr_t s);
  * @return sstr_t substring of \a s.
  */
 sstr_t sstr_substr(sstr_t s, size_t index, size_t len);
+
+/**
+ * @brief clear the sstr_t. After this call, the sstr_t is empty.
+ *
+ * @param s sstr_t instance to clear.
+ */
+void sstr_clear(sstr_t s);
 
 /**
  * @brief Printf implement.

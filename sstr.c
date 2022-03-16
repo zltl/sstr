@@ -14,7 +14,7 @@
 #include <string.h>
 #include <time.h>
 
-#define SHORT_STR_CAPACITY 17
+#define SHORT_STR_CAPACITY 25
 #define CAP_ADD_DELTA 256
 
 struct sstr_s {
@@ -121,6 +121,7 @@ void sstr_append_zero(sstr_t s, size_t length) {
         } else {
             ss->long_str = (char*)realloc(
                 STR_PTR(s), length + ss->length + CAP_ADD_DELTA + 1);
+            ss->long_str_cap = length + ss->length + CAP_ADD_DELTA + 1;
             memset(ss->long_str + ss->length, 0, length + 1);
             ss->length += length;
             return;
@@ -139,6 +140,10 @@ void sstr_append(sstr_t dst, sstr_t src) {
     sstr_append_of(dst, STR_PTR(src), sstr_length(src));
 }
 
+void sstr_append_cstr(sstr_t dst, const char* src) {
+    sstr_append_of(dst, src, strlen(src));
+}
+
 sstr_t sstr_dup(sstr_t s) { return sstr_of(STR_PTR(s), sstr_length(s)); }
 
 sstr_t sstr_substr(sstr_t s, size_t index, size_t len) {
@@ -148,6 +153,18 @@ sstr_t sstr_substr(sstr_t s, size_t index, size_t len) {
         minlen = str_len;
     }
     return sstr_of(STR_PTR(s) + index, minlen);
+}
+
+void sstr_clear(sstr_t s) {
+    STR* ss = (STR*)s;
+    if (STR_SHORT_P(ss)) {
+    } else {
+        free(ss->long_str);
+        ss->long_str = NULL;
+        ss->long_str_cap = 0;
+    }
+    ss->length = 0;
+    ss->short_str[0] = 0;
 }
 
 static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,

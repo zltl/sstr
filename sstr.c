@@ -3,7 +3,7 @@
  * @brief Implementation of the sstr.h header file.
  */
 
-#include "utils/sstr.h"
+#include "sstr.h"
 
 #include <malloc.h>
 #include <stdarg.h>

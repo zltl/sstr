@@ -3,7 +3,7 @@
  * @brief Implementation of the sstr.h header file.
  */
 
-#include "sstr.h"
+#include "utils/sstr.h"
 
 #include <malloc.h>
 #include <stdarg.h>
@@ -66,6 +66,15 @@ char* sstr_cstr(sstr_t s) { return STR_PTR(s); }
 size_t sstr_length(sstr_t s) { return ((STR*)s)->length; }
 
 int sstr_compare(sstr_t a, sstr_t b) {
+    if (a == NULL && b == NULL) {
+        return 0;
+    }
+    if (a == NULL) {
+        return -1;
+    }
+    if (b == NULL) {
+        return 1;
+    }
     size_t alen = sstr_length(a), blen = sstr_length(b);
     size_t minlen = alen;
     if (minlen > blen) {
@@ -182,7 +191,23 @@ sstr_t sstr_printf(const char* fmt, ...) {
     return res;
 }
 
+sstr_t sstr_printf_append(sstr_t buf, const char* fmt, ...) {
+    va_list args;
+    sstr_t res;
+
+    va_start(args, fmt);
+    res = sstr_vslprintf_append(buf, fmt, args);
+    va_end(args);
+    return res;
+}
+
 sstr_t sstr_vslprintf(const char* fmt, va_list args) {
+    sstr_t res = sstr_new();
+    sstr_vslprintf_append(res, fmt, args);
+    return res;
+}
+
+sstr_t sstr_vslprintf_append(sstr_t buf, const char* fmt, va_list args) {
     unsigned char *p, zero;
     int d;
     double f;
@@ -193,10 +218,8 @@ sstr_t sstr_vslprintf(const char* fmt, va_list args) {
     STR* S;
     /* a default d after %..x/u  */
     int df_d;
-    struct sstr_s* buf = NULL;
     unsigned char tmp[100];
     unsigned char* ptmp;
-    buf = (STR*)sstr_new();
 
     while (*fmt) {
         if (*fmt == '%') {
@@ -207,7 +230,7 @@ sstr_t sstr_vslprintf(const char* fmt, va_list args) {
             width = 0;
             sign = 1;
             hex = 0;
-            frac_width = 0;
+            frac_width = 6;
             slen = (size_t)-1;
 
             while (*fmt >= '0' && *fmt <= '9') {
@@ -525,6 +548,6 @@ static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,
 }
 
 const char* sstr_version() {
-    static const char* const version = "1.0.2";
+    static const char* const version = "1.0.1";
     return version;
 }

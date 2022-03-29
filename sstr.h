@@ -228,6 +228,17 @@ void sstr_clear(sstr_t s);
 sstr_t sstr_vslprintf(const char* fmt, va_list args);
 
 /**
+ * @brief Same as sstr_vslprintf, but print to \a buf instead of create a new
+ * one.
+ *
+ * @param buf result sstr_t to print to.
+ * @param fmt format string.
+ * @param args arguments.
+ * @return sstr_t the result string.
+ */
+sstr_t sstr_vslprintf_append(sstr_t buf, const char* fmt, va_list args);
+
+/**
  * @brief printf implement.
  *
  * @param fmt format, like C printf()
@@ -235,6 +246,17 @@ sstr_t sstr_vslprintf(const char* fmt, va_list args);
  * @return sstr_t result string.
  */
 sstr_t sstr_printf(const char* fmt, ...);
+
+/**
+ * @brief Same as sstr_printf(), but but print to \a buf instead of create a new
+ * one.
+ *
+ * @param buf buffer to print to.
+ * @param fmt format string.
+ * @param ... arguments.
+ * @return sstr_t the result string.
+ */
+sstr_t sstr_printf_append(sstr_t buf, const char* fmt, ...);
 
 /**
  * @brief return version string.

@@ -548,6 +548,6 @@ static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,
 }
 
 const char* sstr_version() {
-    static const char* const version = "1.0.1";
+    static const char* const version = "1.0.3";
     return version;
 }

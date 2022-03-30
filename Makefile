@@ -8,8 +8,14 @@ ifeq ($(TARGET_DIR),)
 	TARGET_DIR = $(ROOT_DIR)/target
 endif
 $(shell mkdir -p $(TARGET_DIR))
-SANITIZER_FLAGS = -fsanitize=address -lasan
-CFLAGS ?= -Wall -Wextra -Werror -std=c11 -ggdb -I$(ROOT_DIR) $(SANITIZER_FLAGS)
+
+ifneq ($(SSTR_DEBUG),)
+	DEBUG_FLAGS = -DSSTR_DEBUG
+	SANITIZER_FLAGS = -fsanitize=address -lasan
+endif
+
+CFLAGS += -Wall -Wextra -Werror -std=c11 -ggdb -Wno-unused-result -I$(ROOT_DIR) $(SANITIZER_FLAGS) $(DEBUG_FLAGS)
+CXXFLAGS += -Wall -Wextra -Werror -std=c++17 -ggdb -Wno-unused-result -I$(ROOT_DIR) $(SANITIZER_FLAGS) $(DEBUG_FLAGS)
 LDFLAGS ?=
 
 export
@@ -27,6 +33,9 @@ $(TARGET_DIR)/sstr.c.o: sstr.h sstr.c
 
 $(TARGET_DIR)/example/example: $(TARGET_DIR)/example/example.c.o $(TARGET_DIR)/sstr.c.o
 	gcc $^ -o $@ $(LDFLAGS) $(CFLAGS)
+
+test: $(TARGET_DIR)/sstr.c.o
+	make -C test
 
 clean:
 	rm -rf $(TARGET_DIR)

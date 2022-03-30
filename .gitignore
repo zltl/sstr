@@ -2,3 +2,4 @@
 *.gch
 /.ccls-cache/
 /target
+/.vscode

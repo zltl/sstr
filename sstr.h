@@ -188,7 +188,8 @@ sstr_t sstr_dup(sstr_t s);
  * @param s sstr_t instance to get substring of.
  * @param index index of the first byte of the substring.
  * @param len number of bytes of the substring.
- * @return sstr_t substring of \a s.
+ * @return sstr_t substring of \a s. if \a index is out of range, return an
+ * empty string.
  */
 sstr_t sstr_substr(sstr_t s, size_t index, size_t len);
 

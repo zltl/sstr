@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: install google bench
+      run: sudo apt install libbenchmark-dev libgtest-dev
     - uses: actions/checkout@v2
     - name: make
       run: make
+    - name: make test
+      run: make test
+    - name: run test
+      run: ./target/test/unit_test

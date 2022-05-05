@@ -64,6 +64,8 @@ $(document).ready(function(){initNavTree('sstr_8h.html',''); initResizable(); })
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -98,6 +100,32 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="sstr_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsstr__s.html">sstr_s</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a97298722eedb753e63ca6742d6d07dea"><td class="memItemLeft" align="right" valign="top"><a id="a97298722eedb753e63ca6742d6d07dea"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SHORT_STR_CAPACITY</b>&#160;&#160;&#160;25</td></tr>
+<tr class="separator:a97298722eedb753e63ca6742d6d07dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50dfcc0842363a917b93d9a23e76a4cd"><td class="memItemLeft" align="right" valign="top"><a id="a50dfcc0842363a917b93d9a23e76a4cd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CAP_ADD_DELTA</b>&#160;&#160;&#160;256</td></tr>
+<tr class="separator:a50dfcc0842363a917b93d9a23e76a4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b26ce895798f7fd4df3d6e40b0afad"><td class="memItemLeft" align="right" valign="top"><a id="a02b26ce895798f7fd4df3d6e40b0afad"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSTR_TYPE_SHORT</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a02b26ce895798f7fd4df3d6e40b0afad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdb2acea9cceef81b1749f5604483b54"><td class="memItemLeft" align="right" valign="top"><a id="afdb2acea9cceef81b1749f5604483b54"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSTR_TYPE_LONG</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:afdb2acea9cceef81b1749f5604483b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08dcbb7318a37aaebc120173cdc0b9b"><td class="memItemLeft" align="right" valign="top"><a id="ac08dcbb7318a37aaebc120173cdc0b9b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SSTR_TYPE_REF</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ac08dcbb7318a37aaebc120173cdc0b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f83884713d44719070e83e62639716c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a7f83884713d44719070e83e62639716c">sstr_length</a>(s)&#160;&#160;&#160;((struct <a class="el" href="structsstr__s.html">sstr_s</a>*)s)-&gt;length</td></tr>
+<tr class="memdesc:a7f83884713d44719070e83e62639716c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the length of <em>s</em>, in terms of bytes.  <a href="sstr_8h.html#a7f83884713d44719070e83e62639716c">More...</a><br /></td></tr>
+<tr class="separator:a7f83884713d44719070e83e62639716c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a8d28a1ce0ac6dd8b8e50af6f78e735e7"><td class="memItemLeft" align="right" valign="top"><a id="a8d28a1ce0ac6dd8b8e50af6f78e735e7"></a>
@@ -116,15 +144,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ad61027cdd29e89a0a946740cc04fcba2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ad61027cdd29e89a0a946740cc04fcba2">sstr_of</a> (const void *data, size_t length)</td></tr>
 <tr class="memdesc:ad61027cdd29e89a0a946740cc04fcba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from <em>data</em> with <em>length</em> bytes.  <a href="sstr_8h.html#ad61027cdd29e89a0a946740cc04fcba2">More...</a><br /></td></tr>
 <tr class="separator:ad61027cdd29e89a0a946740cc04fcba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#aadff88bf80c9a1d4b2911f9f19aceb03">sstr_ref</a> (const void *data, size_t length)</td></tr>
+<tr class="memdesc:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from data with length bytes. The data is not copied, but have a pointer to data.  <a href="sstr_8h.html#aadff88bf80c9a1d4b2911f9f19aceb03">More...</a><br /></td></tr>
+<tr class="separator:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3b3c1563041f1323542f3e84f7817b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#aa3b3c1563041f1323542f3e84f7817b1">sstr</a> (const char *cstr)</td></tr>
 <tr class="memdesc:aa3b3c1563041f1323542f3e84f7817b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from C-style (NULL-terminated) string <em>str</em>.  <a href="sstr_8h.html#aa3b3c1563041f1323542f3e84f7817b1">More...</a><br /></td></tr>
 <tr class="separator:aa3b3c1563041f1323542f3e84f7817b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82ec436753ebe2424b3248ef2bad0dd3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a82ec436753ebe2424b3248ef2bad0dd3">sstr_cstr</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
 <tr class="memdesc:a82ec436753ebe2424b3248ef2bad0dd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return C-style string representation of <em>s</em>.  <a href="sstr_8h.html#a82ec436753ebe2424b3248ef2bad0dd3">More...</a><br /></td></tr>
 <tr class="separator:a82ec436753ebe2424b3248ef2bad0dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a196f7aa3191fda9c118547caddd7b682"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a196f7aa3191fda9c118547caddd7b682">sstr_length</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s)</td></tr>
-<tr class="memdesc:a196f7aa3191fda9c118547caddd7b682"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the length of <em>s</em>, in terms of bytes.  <a href="sstr_8h.html#a196f7aa3191fda9c118547caddd7b682">More...</a><br /></td></tr>
-<tr class="separator:a196f7aa3191fda9c118547caddd7b682"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad27f624aa62f1f648e96cc195da7412f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ad27f624aa62f1f648e96cc195da7412f">sstr_compare</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> a, <a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> b)</td></tr>
 <tr class="memdesc:ad27f624aa62f1f648e96cc195da7412f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare <em>a</em> and <em>b</em> return 0 if equal, &lt;0 if <em>a</em> &lt; <em>b</em>, &gt;0 if <em>a</em> &gt; <em>b</em>.  <a href="sstr_8h.html#ad27f624aa62f1f648e96cc195da7412f">More...</a><br /></td></tr>
 <tr class="separator:ad27f624aa62f1f648e96cc195da7412f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -188,7 +216,37 @@ puts(sstr_cstr(result));
 
 sstr_free(result);
 sstr_free(stotal);
-</pre> </div><h2 class="groupheader">Function Documentation</h2>
+</pre> </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a7f83884713d44719070e83e62639716c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f83884713d44719070e83e62639716c">&#9670;&nbsp;</a></span>sstr_length</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sstr_length</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">s</td><td>)</td>
+          <td>&#160;&#160;&#160;((struct <a class="el" href="structsstr__s.html">sstr_s</a>*)s)-&gt;length</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the length of <em>s</em>, in terms of bytes. </p>
+<p>This is the number of actual bytes that conform the contents of the sstr_t, which is not necessarily equal to its storage capacity.</p>
+<p>Note that sstr_t objects handle bytes without knowledge of the encoding that may eventually be used to encode the characters it contains. Therefore, the value returned may not correspond to the actual number of encoded characters in sequences of multi-byte or variable-length characters (such as UTF-8).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>sstr_t instance to get length of. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t The number of bytes of <em>s</em>. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="aa3b3c1563041f1323542f3e84f7817b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa3b3c1563041f1323542f3e84f7817b1">&#9670;&nbsp;</a></span>sstr()</h2>
 
@@ -557,35 +615,6 @@ sstr_free(stotal);
 
 </div>
 </div>
-<a id="a196f7aa3191fda9c118547caddd7b682"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a196f7aa3191fda9c118547caddd7b682">&#9670;&nbsp;</a></span>sstr_length()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t sstr_length </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return the length of <em>s</em>, in terms of bytes. </p>
-<p>This is the number of actual bytes that conform the contents of the sstr_t, which is not necessarily equal to its storage capacity.</p>
-<p>Note that sstr_t objects handle bytes without knowledge of the encoding that may eventually be used to encode the characters it contains. Therefore, the value returned may not correspond to the actual number of encoded characters in sequences of multi-byte or variable-length characters (such as UTF-8).</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s</td><td>sstr_t instance to get length of. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>size_t The number of bytes of <em>s</em>. </dd></dl>
-
-</div>
-</div>
 <a id="ae04c530ce9fbdb9b517ca74ab5f3edbc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae04c530ce9fbdb9b517ca74ab5f3edbc">&#9670;&nbsp;</a></span>sstr_new()</h2>
 
@@ -725,6 +754,47 @@ sstr_free(stotal);
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sstr_t the result string. </dd></dl>
+
+</div>
+</div>
+<a id="aadff88bf80c9a1d4b2911f9f19aceb03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadff88bf80c9a1d4b2911f9f19aceb03">&#9670;&nbsp;</a></span>sstr_ref()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> sstr_ref </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a sstr_t from data with length bytes. The data is not copied, but have a pointer to data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>data of the result sstr_t. </td></tr>
+    <tr><td class="paramname">length</td><td>length of <em>data</em>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sstr_t </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The result sstr_t does not own data, but have a pointer to data. It is a reference, not a copy. </dd>
+<dd>
+You cannot append a <a class="el" href="sstr_8h.html#aadff88bf80c9a1d4b2911f9f19aceb03" title="Create a sstr_t from data with length bytes. The data is not copied, but have a pointer to data.">sstr_ref()</a> result. </dd></dl>
 
 </div>
 </div>

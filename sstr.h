@@ -98,6 +98,19 @@ void sstr_free(sstr_t s);
 sstr_t sstr_of(const void* data, size_t length);
 
 /**
+ * @brief Create a sstr_t from data with length bytes. The data is not
+ * copied, but have a pointer to data.
+ * 
+ * @param data data of the result sstr_t.
+ * @param length length of \a data.
+ * @return sstr_t 
+ * @note The result sstr_t does not own data, but have a pointer to data. It is
+ * a reference, not a copy.
+ * @note You cannot append a sstr_ref() result.
+ */
+sstr_t sstr_ref(const void* data, size_t length);
+
+/**
  * @brief Create a sstr_t from C-style (NULL-terminated) string \a str.
  * @details The \a cstr is copied to the new sstr_t, so you can free \a cstr
  * after calling this function.

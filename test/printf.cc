@@ -65,7 +65,7 @@ TEST(printf, float) {
         sstr_t r = sstr_printf("thisis%.10ffloat", f);
         char tmp[1000];
         snprintf(tmp, sizeof(tmp), "thisis%.10ffloat", f);
-        printf("%.10f--%s\n", f, sstr_cstr(r));
+       // printf("%.10f--%s\n", f, sstr_cstr(r));
         /* TODO: compare round
         ASSERT_EQ(sstr_compare_c(r, tmp), 0)
             << "f:" << f << " tmp:" << tmp << " r:" << sstr_cstr(r) << endl;
@@ -77,7 +77,7 @@ TEST(printf, float) {
         sstr_t r = sstr_printf("thisis%.10ffloat", f);
         char tmp[1000];
         snprintf(tmp, sizeof(tmp), "thisis%.10ffloat", f);
-        printf("%.10f--%s\n", f, sstr_cstr(r));
+        // printf("%.10f--%s\n", f, sstr_cstr(r));
         /* TODO: compare round
         ASSERT_EQ(sstr_compare_c(r, tmp), 0)
             << "f:" << f << " tmp:" << tmp << " r:" << sstr_cstr(r) << endl;

@@ -42,6 +42,31 @@
 extern "C" {
 #endif
 
+#define SHORT_STR_CAPACITY 25
+#define CAP_ADD_DELTA 256
+
+struct sstr_s {
+    size_t length;  // MUST FIRST, see sstr_length at sstr.h
+    char type;
+    union {
+        // short string store datas in short_str
+        char short_str[SHORT_STR_CAPACITY + 1];
+        // long string allocate a buffer and store datas in long_str
+        struct {
+            size_t capacity;
+            char* data;
+        } long_str;
+        // reference to a memory buffer
+        struct {
+            char* data;
+        } ref_str;
+    } un;
+};
+
+#define SSTR_TYPE_SHORT 0
+#define SSTR_TYPE_LONG 1
+#define SSTR_TYPE_REF 2
+
 /**
  * @brief sstr_t are objects that represent sequences of characters.
  */
@@ -109,7 +134,7 @@ char* sstr_cstr(sstr_t s);
  * @param s sstr_t instance to get length of.
  * @return size_t The number of bytes of \a s.
  */
-size_t sstr_length(sstr_t s);
+#define sstr_length(s) ((struct sstr_s*)s)->length
 
 /**
  * @brief Compare \a a and \a b

@@ -5,6 +5,7 @@
 
 #include "sstr.h"
 
+#include <assert.h>
 #include <malloc.h>
 #include <stdarg.h>
 #include <stddef.h>
@@ -14,19 +15,14 @@
 #include <string.h>
 #include <time.h>
 
-#define SHORT_STR_CAPACITY 25
-#define CAP_ADD_DELTA 256
-
-struct sstr_s {
-    size_t length;
-    char short_str[SHORT_STR_CAPACITY + 1];
-    char* long_str;
-    size_t long_str_cap;
-};
 #define STR struct sstr_s
+#define SSTR(s) ((STR*)(s))
 
-#define STR_SHORT_P(s) (((STR*)s)->length <= SHORT_STR_CAPACITY)
-#define STR_PTR(s) (STR_SHORT_P(s) ? ((STR*)s)->short_str : ((STR*)s)->long_str)
+#define STR_PTR(s)                                                        \
+    ((SSTR(s))->type == SSTR_TYPE_SHORT                                   \
+         ? (SSTR(s))->un.short_str                                        \
+         : (SSTR(s)->type == SSTR_TYPE_LONG ? (SSTR(s)->un.long_str.data) \
+                                            : (SSTR(s)->un.ref_str.data)))
 
 sstr_t sstr_new() {
     STR* s = (STR*)malloc(sizeof(STR));
@@ -39,8 +35,8 @@ void sstr_free(sstr_t s) {
         return;
     }
     STR* ss = (STR*)s;
-    if (!STR_SHORT_P(ss)) {
-        free(ss->long_str);
+    if (ss->type == SSTR_TYPE_LONG) {
+        free(ss->un.long_str.data);
     }
     free(s);
 }
@@ -48,22 +44,31 @@ void sstr_free(sstr_t s) {
 sstr_t sstr_of(const void* data, size_t length) {
     STR* s = (STR*)sstr_new();
     if (length <= SHORT_STR_CAPACITY) {
-        memcpy(s->short_str, data, length);
+        memcpy(s->un.short_str, data, length);
+        s->un.short_str[length] = '\0';
+        s->type = SSTR_TYPE_SHORT;
     } else {
-        s->long_str = (char*)malloc(length + 1);
-        memcpy(s->long_str, data, length);
-        s->long_str_cap = length;
+        s->un.long_str.data = (char*)malloc(length + 1);
+        memcpy(s->un.long_str.data, data, length);
+        s->un.long_str.capacity = length;
+        s->un.long_str.data[length] = '\0';
+        s->type = SSTR_TYPE_LONG;
     }
     s->length = length;
-    STR_PTR(s)[length] = 0;
+    return s;
+}
+
+sstr_t sstr_ref(const void* data, size_t length) {
+    STR* s = (STR*)sstr_new();
+    s->un.ref_str.data = (char*)data;
+    s->length = length;
+    s->type = SSTR_TYPE_REF;
     return s;
 }
 
 sstr_t sstr(const char* cstr) { return sstr_of(cstr, strlen(cstr)); }
 
 char* sstr_cstr(sstr_t s) { return STR_PTR(s); }
-
-size_t sstr_length(sstr_t s) { return ((STR*)s)->length; }
 
 int sstr_compare(sstr_t a, sstr_t b) {
     if (a == NULL && b == NULL) {
@@ -105,33 +110,34 @@ int sstr_compare_c(sstr_t a, const char* b) {
 void sstr_append_zero(sstr_t s, size_t length) {
     STR* ss = (STR*)s;
 
-    if (STR_SHORT_P(s)) {
+    assert(ss->type != SSTR_TYPE_REF);
+
+    if (ss->type == SSTR_TYPE_SHORT) {
         if (ss->length + length <= SHORT_STR_CAPACITY) {
-            memset(ss->short_str + ss->length, 0, length + 1);
+            memset(ss->un.short_str + ss->length, 0, length + 1);
             ss->length += length;
             return;
         } else {
-            if (ss->long_str) {
-                free(ss->long_str);
-            }
-            ss->long_str =
+            char* ldata =
                 (char*)malloc(length + ss->length + CAP_ADD_DELTA + 1);
-            ss->long_str_cap = length + ss->length + CAP_ADD_DELTA;
-            memcpy(ss->long_str, ss->short_str, ss->length);
-            memset(ss->long_str + ss->length, 0, length + 1);
+            memcpy(ldata, ss->un.short_str, ss->length);
+            memset(ldata + ss->length, 0, length + 1);
+            ss->un.long_str.data = ldata;
+            ss->un.long_str.capacity = length + ss->length + CAP_ADD_DELTA;
             ss->length += length;
+            ss->type = SSTR_TYPE_LONG;
             return;
         }
     } else {
-        if (ss->long_str_cap - ss->length > length) {
-            memset(ss->long_str + ss->length, 0, length + 1);
+        if (ss->un.long_str.capacity - ss->length > length) {
+            memset(ss->un.long_str.data + ss->length, 0, length + 1);
             ss->length += length;
             return;
         } else {
-            ss->long_str = (char*)realloc(
+            ss->un.long_str.data = (char*)realloc(
                 STR_PTR(s), length + ss->length + CAP_ADD_DELTA + 1);
-            ss->long_str_cap = length + ss->length + CAP_ADD_DELTA + 1;
-            memset(ss->long_str + ss->length, 0, length + 1);
+            ss->un.long_str.capacity = length + ss->length + CAP_ADD_DELTA + 1;
+            memset(ss->un.long_str.data + ss->length, 0, length + 1);
             ss->length += length;
             return;
         }
@@ -169,14 +175,23 @@ sstr_t sstr_substr(sstr_t s, size_t index, size_t len) {
 
 void sstr_clear(sstr_t s) {
     STR* ss = (STR*)s;
-    if (STR_SHORT_P(ss)) {
-    } else {
-        free(ss->long_str);
-        ss->long_str = NULL;
-        ss->long_str_cap = 0;
+
+    switch (ss->type) {
+        case SSTR_TYPE_REF:
+            ss->length = 0;
+            ss->un.ref_str.data = NULL;
+            break;
+        case SSTR_TYPE_SHORT:
+            ss->length = 0;
+            ss->un.short_str[0] = 0;
+            break;
+        case SSTR_TYPE_LONG:
+            ss->length = 0;
+            free(ss->un.long_str.data);
+            ss->un.long_str.data = NULL;
+            ss->un.long_str.capacity = 0;
+            break;
     }
-    ss->length = 0;
-    ss->short_str[0] = 0;
 }
 
 static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,
@@ -558,6 +573,6 @@ static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,
 }
 
 const char* sstr_version() {
-    static const char* const version = "1.0.4";
+    static const char* const version = "1.1.0";
     return version;
 }

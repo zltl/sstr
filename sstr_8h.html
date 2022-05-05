@@ -144,9 +144,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ad61027cdd29e89a0a946740cc04fcba2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ad61027cdd29e89a0a946740cc04fcba2">sstr_of</a> (const void *data, size_t length)</td></tr>
 <tr class="memdesc:ad61027cdd29e89a0a946740cc04fcba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from <em>data</em> with <em>length</em> bytes.  <a href="sstr_8h.html#ad61027cdd29e89a0a946740cc04fcba2">More...</a><br /></td></tr>
 <tr class="separator:ad61027cdd29e89a0a946740cc04fcba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#aadff88bf80c9a1d4b2911f9f19aceb03">sstr_ref</a> (const void *data, size_t length)</td></tr>
-<tr class="memdesc:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from data with length bytes. The data is not copied, but have a pointer to data.  <a href="sstr_8h.html#aadff88bf80c9a1d4b2911f9f19aceb03">More...</a><br /></td></tr>
-<tr class="separator:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3b3c1563041f1323542f3e84f7817b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#aa3b3c1563041f1323542f3e84f7817b1">sstr</a> (const char *cstr)</td></tr>
 <tr class="memdesc:aa3b3c1563041f1323542f3e84f7817b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from C-style (NULL-terminated) string <em>str</em>.  <a href="sstr_8h.html#aa3b3c1563041f1323542f3e84f7817b1">More...</a><br /></td></tr>
 <tr class="separator:aa3b3c1563041f1323542f3e84f7817b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -754,47 +751,6 @@ sstr_free(stotal);
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sstr_t the result string. </dd></dl>
-
-</div>
-</div>
-<a id="aadff88bf80c9a1d4b2911f9f19aceb03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadff88bf80c9a1d4b2911f9f19aceb03">&#9670;&nbsp;</a></span>sstr_ref()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> sstr_ref </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>length</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create a sstr_t from data with length bytes. The data is not copied, but have a pointer to data. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data</td><td>data of the result sstr_t. </td></tr>
-    <tr><td class="paramname">length</td><td>length of <em>data</em>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>sstr_t </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The result sstr_t does not own data, but have a pointer to data. It is a reference, not a copy. </dd>
-<dd>
-You cannot append a <a class="el" href="sstr_8h.html#aadff88bf80c9a1d4b2911f9f19aceb03" title="Create a sstr_t from data with length bytes. The data is not copied, but have a pointer to data.">sstr_ref()</a> result. </dd></dl>
 
 </div>
 </div>

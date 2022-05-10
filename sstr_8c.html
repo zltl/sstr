@@ -75,6 +75,7 @@ $(document).ready(function(){initNavTree('sstr_8c.html',''); initResizable(); })
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="sstr_8h_source.html">sstr.h</a>&quot;</code><br />
 <code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;ctype.h&gt;</code><br />
 <code>#include &lt;malloc.h&gt;</code><br />
 <code>#include &lt;stdarg.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
@@ -88,17 +89,18 @@ Include dependency graph for sstr.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="sstr_8c__incl.png" border="0" usemap="#sstr_8c" alt=""/></div>
 <map name="sstr_8c" id="sstr_8c">
-<area shape="rect" title="Implementation of the sstr.h header file." alt="" coords="356,5,412,32"/>
+<area shape="rect" title="Implementation of the sstr.h header file." alt="" coords="401,5,457,32"/>
 <area shape="rect" href="sstr_8h.html" title="sstr_t are objects that represent sequences of characters." alt="" coords="63,80,121,107"/>
 <area shape="rect" title=" " alt="" coords="5,155,80,181"/>
 <area shape="rect" title=" " alt="" coords="112,155,187,181"/>
 <area shape="rect" title=" " alt="" coords="196,80,271,107"/>
-<area shape="rect" title=" " alt="" coords="295,80,374,107"/>
-<area shape="rect" title=" " alt="" coords="398,80,469,107"/>
-<area shape="rect" title=" " alt="" coords="493,80,560,107"/>
-<area shape="rect" title=" " alt="" coords="585,80,655,107"/>
+<area shape="rect" title=" " alt="" coords="295,80,366,107"/>
+<area shape="rect" title=" " alt="" coords="390,80,469,107"/>
+<area shape="rect" title=" " alt="" coords="493,80,563,107"/>
+<area shape="rect" title=" " alt="" coords="588,80,655,107"/>
 <area shape="rect" title=" " alt="" coords="679,80,750,107"/>
-<area shape="rect" title=" " alt="" coords="775,80,839,107"/>
+<area shape="rect" title=" " alt="" coords="774,80,845,107"/>
+<area shape="rect" title=" " alt="" coords="869,80,933,107"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -136,8 +138,8 @@ Functions</h2></td></tr>
 <tr class="memitem:ad61027cdd29e89a0a946740cc04fcba2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#ad61027cdd29e89a0a946740cc04fcba2">sstr_of</a> (const void *data, size_t length)</td></tr>
 <tr class="memdesc:ad61027cdd29e89a0a946740cc04fcba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from <em>data</em> with <em>length</em> bytes.  <a href="sstr_8c.html#ad61027cdd29e89a0a946740cc04fcba2">More...</a><br /></td></tr>
 <tr class="separator:ad61027cdd29e89a0a946740cc04fcba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="memItemLeft" align="right" valign="top"><a id="aadff88bf80c9a1d4b2911f9f19aceb03"></a>
-<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_ref</b> (const void *data, size_t length)</td></tr>
+<tr class="memitem:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#aadff88bf80c9a1d4b2911f9f19aceb03">sstr_ref</a> (const void *data, size_t length)</td></tr>
+<tr class="memdesc:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from data with length bytes. The data is not copied, but have a pointer to data.  <a href="sstr_8c.html#aadff88bf80c9a1d4b2911f9f19aceb03">More...</a><br /></td></tr>
 <tr class="separator:aadff88bf80c9a1d4b2911f9f19aceb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3b3c1563041f1323542f3e84f7817b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#aa3b3c1563041f1323542f3e84f7817b1">sstr</a> (const char *cstr)</td></tr>
 <tr class="memdesc:aa3b3c1563041f1323542f3e84f7817b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a sstr_t from C-style (NULL-terminated) string <em>str</em>.  <a href="sstr_8c.html#aa3b3c1563041f1323542f3e84f7817b1">More...</a><br /></td></tr>
@@ -187,6 +189,28 @@ Functions</h2></td></tr>
 <tr class="memitem:a813f8f8071072a59b56881348bcc7b60"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#a813f8f8071072a59b56881348bcc7b60">sstr_version</a> ()</td></tr>
 <tr class="memdesc:a813f8f8071072a59b56881348bcc7b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">return version string.  <a href="sstr_8c.html#a813f8f8071072a59b56881348bcc7b60">More...</a><br /></td></tr>
 <tr class="separator:a813f8f8071072a59b56881348bcc7b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa5dc9a3c19614c5cec61b530762c8af"><td class="memItemLeft" align="right" valign="top"><a id="afa5dc9a3c19614c5cec61b530762c8af"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#afa5dc9a3c19614c5cec61b530762c8af">sstr_append_int_str</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, int i)</td></tr>
+<tr class="memdesc:afa5dc9a3c19614c5cec61b530762c8af"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert sstr &lt;-&gt; int,long,float,double <br /></td></tr>
+<tr class="separator:afa5dc9a3c19614c5cec61b530762c8af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c3ffef62210a36405f2435ee4dc10aa"><td class="memItemLeft" align="right" valign="top"><a id="a3c3ffef62210a36405f2435ee4dc10aa"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_parse_long</b> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, long *v)</td></tr>
+<tr class="separator:a3c3ffef62210a36405f2435ee4dc10aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaf59c981c9c6603f54a6d63ed50411f"><td class="memItemLeft" align="right" valign="top"><a id="adaf59c981c9c6603f54a6d63ed50411f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_parse_int</b> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> *s, int *v)</td></tr>
+<tr class="separator:adaf59c981c9c6603f54a6d63ed50411f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d8ee8186100ac02b9e14b0c66bb739c"><td class="memItemLeft" align="right" valign="top"><a id="a7d8ee8186100ac02b9e14b0c66bb739c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_append_long_str</b> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, long l)</td></tr>
+<tr class="separator:a7d8ee8186100ac02b9e14b0c66bb739c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79ddf1f3fe7fc4448a4137157e42aa2f"><td class="memItemLeft" align="right" valign="top"><a id="a79ddf1f3fe7fc4448a4137157e42aa2f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_append_float_str</b> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, float f, int precission)</td></tr>
+<tr class="separator:a79ddf1f3fe7fc4448a4137157e42aa2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dc643913e16315be6847da9b19e4664"><td class="memItemLeft" align="right" valign="top"><a id="a8dc643913e16315be6847da9b19e4664"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_append_double_str</b> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, double f, int precision)</td></tr>
+<tr class="separator:a8dc643913e16315be6847da9b19e4664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e6f5b951022c69805506e4419c61f2b"><td class="memItemLeft" align="right" valign="top"><a id="a5e6f5b951022c69805506e4419c61f2b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_parse_double</b> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, double *v)</td></tr>
+<tr class="separator:a5e6f5b951022c69805506e4419c61f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the <a class="el" href="sstr_8h.html" title="sstr_t are objects that represent sequences of characters.">sstr.h</a> header file. </p>
@@ -724,6 +748,47 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aadff88bf80c9a1d4b2911f9f19aceb03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadff88bf80c9a1d4b2911f9f19aceb03">&#9670;&nbsp;</a></span>sstr_ref()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> sstr_ref </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a sstr_t from data with length bytes. The data is not copied, but have a pointer to data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>data of the result sstr_t. </td></tr>
+    <tr><td class="paramname">length</td><td>length of <em>data</em>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sstr_t </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The result sstr_t does not own data, but have a pointer to data. It is a reference, not a copy. </dd>
+<dd>
+You cannot append a <a class="el" href="sstr_8h.html#aadff88bf80c9a1d4b2911f9f19aceb03" title="Create a sstr_t from data with length bytes. The data is not copied, but have a pointer to data.">sstr_ref()</a> result. </dd></dl>
+
+</div>
+</div>
 <a id="a5ba343262041c4dc26b5c218c4cc9cb3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5ba343262041c4dc26b5c218c4cc9cb3">&#9670;&nbsp;</a></span>sstr_substr()</h2>
 
@@ -826,7 +891,7 @@ Functions</h2></td></tr>
 <li>%[0][width][u][x|X]L int64_t/uint64_t</li>
 <li>%[0][width][.width]f double, max valid number fits to %18.15f</li>
 <li>p void *</li>
-<li>S sstr_t</li>
+<li>%[x|X]S sstr_t, if x, print as hexadecimal</li>
 <li>s null-terminated string</li>
 <li>%*s length and string</li>
 <li>Z '\0'</li>

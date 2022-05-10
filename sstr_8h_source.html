@@ -154,13 +154,16 @@ $(document).ready(function(){initNavTree('sstr_8h_source.html',''); initResizabl
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="keywordtype">void</span> sstr_append_double_str(<a class="code" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, <span class="keywordtype">double</span> f, <span class="keywordtype">int</span> precision);</div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="keywordtype">int</span> sstr_parse_double(<a class="code" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, <span class="keywordtype">double</span>* v);</div>
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="sstr_8h.html#a813f8f8071072a59b56881348bcc7b60">sstr_version</a>();</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;}</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SSTR_H_  */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">// escape string to json string format</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="keywordtype">int</span> sstr_json_escape_string_append(<a class="code" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> out, <a class="code" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> in);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="sstr_8h.html#a813f8f8071072a59b56881348bcc7b60">sstr_version</a>();</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;}</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SSTR_H_  */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="asstr_8h_html_a5ba343262041c4dc26b5c218c4cc9cb3"><div class="ttname"><a href="sstr_8h.html#a5ba343262041c4dc26b5c218c4cc9cb3">sstr_substr</a></div><div class="ttdeci">sstr_t sstr_substr(sstr_t s, size_t index, size_t len)</div><div class="ttdoc">Get substring of s starting at index with length bytes.</div><div class="ttdef"><b>Definition:</b> sstr.c:178</div></div>

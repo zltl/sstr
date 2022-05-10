@@ -23,6 +23,7 @@ var sstr_8h =
     [ "sstr_cstr", "sstr_8h.html#a82ec436753ebe2424b3248ef2bad0dd3", null ],
     [ "sstr_dup", "sstr_8h.html#a87e2708071bfb86f3961788466c9192f", null ],
     [ "sstr_free", "sstr_8h.html#ae99d652d5a9d25fc79343d2ac18cb0e5", null ],
+    [ "sstr_json_escape_string_append", "sstr_8h.html#a7b300c1b39752d5cddd73689320040b6", null ],
     [ "sstr_new", "sstr_8h.html#ae04c530ce9fbdb9b517ca74ab5f3edbc", null ],
     [ "sstr_of", "sstr_8h.html#ad61027cdd29e89a0a946740cc04fcba2", null ],
     [ "sstr_parse_double", "sstr_8h.html#a5e6f5b951022c69805506e4419c61f2b", null ],

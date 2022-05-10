@@ -125,6 +125,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a7f83884713d44719070e83e62639716c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a7f83884713d44719070e83e62639716c">sstr_length</a>(s)&#160;&#160;&#160;((struct <a class="el" href="structsstr__s.html">sstr_s</a>*)s)-&gt;length</td></tr>
 <tr class="memdesc:a7f83884713d44719070e83e62639716c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the length of <em>s</em>, in terms of bytes.  <a href="sstr_8h.html#a7f83884713d44719070e83e62639716c">More...</a><br /></td></tr>
 <tr class="separator:a7f83884713d44719070e83e62639716c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5290253c7b53c6a66ed07b782f68714"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#ad5290253c7b53c6a66ed07b782f68714">sstr_append_cstr_if</a>(dst,  src,  cond)&#160;&#160;&#160;<a class="el" href="sstr_8c.html#a2d78409e863e5c0ba6da2ffbdcc4ff2b">sstr_append_of_if</a>(dst, src, strlen(src), cond)</td></tr>
+<tr class="memdesc:ad5290253c7b53c6a66ed07b782f68714"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append C style string if cond is true, otherwise do nothing.  <a href="sstr_8h.html#ad5290253c7b53c6a66ed07b782f68714">More...</a><br /></td></tr>
+<tr class="separator:ad5290253c7b53c6a66ed07b782f68714"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -214,9 +217,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_append_double_st
 <tr class="memitem:a5e6f5b951022c69805506e4419c61f2b"><td class="memItemLeft" align="right" valign="top"><a id="a5e6f5b951022c69805506e4419c61f2b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_parse_double</b> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, double *v)</td></tr>
 <tr class="separator:a5e6f5b951022c69805506e4419c61f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d78409e863e5c0ba6da2ffbdcc4ff2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a2d78409e863e5c0ba6da2ffbdcc4ff2b">sstr_append_of_if</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, const void *data, size_t length, int cond)</td></tr>
+<tr class="memdesc:a2d78409e863e5c0ba6da2ffbdcc4ff2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append if cond is true, otherwise do nothing.  <a href="sstr_8h.html#a2d78409e863e5c0ba6da2ffbdcc4ff2b">More...</a><br /></td></tr>
+<tr class="separator:a2d78409e863e5c0ba6da2ffbdcc4ff2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b300c1b39752d5cddd73689320040b6"><td class="memItemLeft" align="right" valign="top"><a id="a7b300c1b39752d5cddd73689320040b6"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_json_escape_string_append</b> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> out, <a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> in)</td></tr>
 <tr class="separator:a7b300c1b39752d5cddd73689320040b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd1c074e4c7d2d69a4f3c9f52c8600f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#abd1c074e4c7d2d69a4f3c9f52c8600f6">sstr_append_indent</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, size_t indent)</td></tr>
+<tr class="memdesc:abd1c074e4c7d2d69a4f3c9f52c8600f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">append spaces at the end of the sstr_t.  <a href="sstr_8h.html#abd1c074e4c7d2d69a4f3c9f52c8600f6">More...</a><br /></td></tr>
+<tr class="separator:abd1c074e4c7d2d69a4f3c9f52c8600f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a813f8f8071072a59b56881348bcc7b60"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8h.html#a813f8f8071072a59b56881348bcc7b60">sstr_version</a> ()</td></tr>
 <tr class="memdesc:a813f8f8071072a59b56881348bcc7b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">return version string.  <a href="sstr_8h.html#a813f8f8071072a59b56881348bcc7b60">More...</a><br /></td></tr>
 <tr class="separator:a813f8f8071072a59b56881348bcc7b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -242,6 +251,50 @@ puts(sstr_cstr(result));
 sstr_free(result);
 sstr_free(stotal);
 </pre> </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ad5290253c7b53c6a66ed07b782f68714"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5290253c7b53c6a66ed07b782f68714">&#9670;&nbsp;</a></span>sstr_append_cstr_if</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sstr_append_cstr_if</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">dst, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">src, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">cond&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="sstr_8c.html#a2d78409e863e5c0ba6da2ffbdcc4ff2b">sstr_append_of_if</a>(dst, src, strlen(src), cond)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Append C style string if cond is true, otherwise do nothing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dst</td><td>destination sstr_t to append to. </td></tr>
+    <tr><td class="paramname">src</td><td>source C-style string to append </td></tr>
+    <tr><td class="paramname">cond</td><td>condition </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7f83884713d44719070e83e62639716c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f83884713d44719070e83e62639716c">&#9670;&nbsp;</a></span>sstr_length</h2>
 
@@ -374,6 +427,43 @@ sstr_free(stotal);
 
 </div>
 </div>
+<a id="abd1c074e4c7d2d69a4f3c9f52c8600f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd1c074e4c7d2d69a4f3c9f52c8600f6">&#9670;&nbsp;</a></span>sstr_append_indent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sstr_append_indent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>indent</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>append spaces at the end of the sstr_t. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>the sstr_t to append spaces to. </td></tr>
+    <tr><td class="paramname">indent</td><td>numbers of spaces to append. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ab55b8f697e21006921e191ca25dbcec5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab55b8f697e21006921e191ca25dbcec5">&#9670;&nbsp;</a></span>sstr_append_of()</h2>
 
@@ -412,6 +502,57 @@ sstr_free(stotal);
     <tr><td class="paramname">s</td><td>destination sstr_t. </td></tr>
     <tr><td class="paramname">data</td><td>data to append. </td></tr>
     <tr><td class="paramname">length</td><td>length of <em>data</em>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2d78409e863e5c0ba6da2ffbdcc4ff2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d78409e863e5c0ba6da2ffbdcc4ff2b">&#9670;&nbsp;</a></span>sstr_append_of_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sstr_append_of_if </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cond</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Append if cond is true, otherwise do nothing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>the sstr_t to append to. </td></tr>
+    <tr><td class="paramname">data</td><td>data to append. </td></tr>
+    <tr><td class="paramname">length</td><td>length of <em>data</em>. </td></tr>
+    <tr><td class="paramname">cond</td><td>condition </td></tr>
   </table>
   </dd>
 </dl>

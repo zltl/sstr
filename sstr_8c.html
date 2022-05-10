@@ -214,6 +214,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_parse_double</b> 
 <tr class="memitem:a7b300c1b39752d5cddd73689320040b6"><td class="memItemLeft" align="right" valign="top"><a id="a7b300c1b39752d5cddd73689320040b6"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_json_escape_string_append</b> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> out, <a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> in)</td></tr>
 <tr class="separator:a7b300c1b39752d5cddd73689320040b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d78409e863e5c0ba6da2ffbdcc4ff2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#a2d78409e863e5c0ba6da2ffbdcc4ff2b">sstr_append_of_if</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, const void *data, size_t length, int cond)</td></tr>
+<tr class="memdesc:a2d78409e863e5c0ba6da2ffbdcc4ff2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append if cond is true, otherwise do nothing.  <a href="sstr_8c.html#a2d78409e863e5c0ba6da2ffbdcc4ff2b">More...</a><br /></td></tr>
+<tr class="separator:a2d78409e863e5c0ba6da2ffbdcc4ff2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd1c074e4c7d2d69a4f3c9f52c8600f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sstr_8c.html#abd1c074e4c7d2d69a4f3c9f52c8600f6">sstr_append_indent</a> (<a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a> s, size_t indent)</td></tr>
+<tr class="memdesc:abd1c074e4c7d2d69a4f3c9f52c8600f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">append spaces at the end of the sstr_t.  <a href="sstr_8c.html#abd1c074e4c7d2d69a4f3c9f52c8600f6">More...</a><br /></td></tr>
+<tr class="separator:abd1c074e4c7d2d69a4f3c9f52c8600f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the <a class="el" href="sstr_8h.html" title="sstr_t are objects that represent sequences of characters.">sstr.h</a> header file. </p>
@@ -343,6 +349,43 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_json_escape_strin
 
 </div>
 </div>
+<a id="abd1c074e4c7d2d69a4f3c9f52c8600f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd1c074e4c7d2d69a4f3c9f52c8600f6">&#9670;&nbsp;</a></span>sstr_append_indent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sstr_append_indent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>indent</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>append spaces at the end of the sstr_t. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>the sstr_t to append spaces to. </td></tr>
+    <tr><td class="paramname">indent</td><td>numbers of spaces to append. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ab55b8f697e21006921e191ca25dbcec5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab55b8f697e21006921e191ca25dbcec5">&#9670;&nbsp;</a></span>sstr_append_of()</h2>
 
@@ -381,6 +424,57 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sstr_json_escape_strin
     <tr><td class="paramname">s</td><td>destination sstr_t. </td></tr>
     <tr><td class="paramname">data</td><td>data to append. </td></tr>
     <tr><td class="paramname">length</td><td>length of <em>data</em>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2d78409e863e5c0ba6da2ffbdcc4ff2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d78409e863e5c0ba6da2ffbdcc4ff2b">&#9670;&nbsp;</a></span>sstr_append_of_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sstr_append_of_if </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="sstr_8h.html#a8d28a1ce0ac6dd8b8e50af6f78e735e7">sstr_t</a>&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cond</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Append if cond is true, otherwise do nothing. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>the sstr_t to append to. </td></tr>
+    <tr><td class="paramname">data</td><td>data to append. </td></tr>
+    <tr><td class="paramname">length</td><td>length of <em>data</em>. </td></tr>
+    <tr><td class="paramname">cond</td><td>condition </td></tr>
   </table>
   </dd>
 </dl>

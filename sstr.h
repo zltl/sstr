@@ -307,6 +307,9 @@ void sstr_append_float_str(sstr_t s, float f, int precission);
 void sstr_append_double_str(sstr_t s, double f, int precision);
 int sstr_parse_double(sstr_t s, double* v);
 
+// escape string to json string format
+int sstr_json_escape_string_append(sstr_t out, sstr_t in);
+
 /**
  * @brief return version string.
  *

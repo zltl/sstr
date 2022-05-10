@@ -100,10 +100,10 @@ sstr_t sstr_of(const void* data, size_t length);
 /**
  * @brief Create a sstr_t from data with length bytes. The data is not
  * copied, but have a pointer to data.
- * 
+ *
  * @param data data of the result sstr_t.
  * @param length length of \a data.
- * @return sstr_t 
+ * @return sstr_t
  * @note The result sstr_t does not own data, but have a pointer to data. It is
  * a reference, not a copy.
  * @note You cannot append a sstr_ref() result.
@@ -251,7 +251,7 @@ void sstr_clear(sstr_t s);
  *   - %[0][width][u][x|X]L      int64_t/uint64_t
  *   - %[0][width][.width]f      double, max valid number fits to %18.15f
  *   - %p                        void *
- *   - %S                        sstr_t
+ *   - %[x|X]S                   sstr_t, if x, print as hexadecimal
  *   - %s                        null-terminated string
  *   - %*s                       length and string
  *   - %Z                        '\0'
@@ -296,6 +296,16 @@ sstr_t sstr_printf(const char* fmt, ...);
  * @return sstr_t the result string.
  */
 sstr_t sstr_printf_append(sstr_t buf, const char* fmt, ...);
+
+/// convert sstr <-> int,long,float,double
+
+void sstr_append_int_str(sstr_t s, int i);
+int sstr_parse_long(sstr_t s, long* v);
+int sstr_parse_int(sstr_t* s, int* v);
+void sstr_append_long_str(sstr_t s, long l);
+void sstr_append_float_str(sstr_t s, float f, int precission);
+void sstr_append_double_str(sstr_t s, double f, int precision);
+int sstr_parse_double(sstr_t s, double* v);
 
 /**
  * @brief return version string.

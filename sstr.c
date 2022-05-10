@@ -6,6 +6,7 @@
 #include "sstr.h"
 
 #include <assert.h>
+#include <ctype.h>
 #include <malloc.h>
 #include <stdarg.h>
 #include <stddef.h>
@@ -23,6 +24,19 @@
          ? (SSTR(s))->un.short_str                                        \
          : (SSTR(s)->type == SSTR_TYPE_LONG ? (SSTR(s)->un.long_str.data) \
                                             : (SSTR(s)->un.ref_str.data)))
+
+static void char_to_hex(unsigned char c, unsigned char* buf, int cap) {
+    static unsigned char hex[] = "0123456789abcdef";
+    static unsigned char HEX[] = "0123456789ABCDEF";
+
+    if (cap) {
+        buf[0] = HEX[((c >> 4) & 0x0f)];
+        buf[1] = HEX[(c & 0x0f)];
+    } else {
+        buf[0] = hex[((c >> 4) & 0x0f)];
+        buf[1] = hex[(c & 0x0f)];
+    }
+}
 
 sstr_t sstr_new() {
     STR* s = (STR*)malloc(sizeof(STR));
@@ -230,6 +244,7 @@ sstr_t sstr_vslprintf_append(sstr_t buf, const char* fmt, va_list args) {
     int d;
     double f;
     size_t slen;
+    size_t i;
     int64_t i64;
     uint64_t ui64, frac, scale;
     unsigned int width, sign, hex, frac_width, frac_width_set, n;
@@ -307,8 +322,15 @@ sstr_t sstr_vslprintf_append(sstr_t buf, const char* fmt, va_list args) {
                     if (S == NULL) {
                         p = (unsigned char*)"NULL";
                         sstr_append_of(buf, p, 4);
-                    } else {
+                    } else if (hex == 0) {
                         sstr_append(buf, S);
+                    } else if (hex) {
+                        p = (unsigned char*)STR_PTR(S);
+                        slen = sstr_length(S);
+                        for (i = 0; i < slen; ++i) {
+                            char_to_hex(p[i], tmp, hex == 2);
+                            sstr_append_of(buf, tmp, 2);
+                        }
                     }
 
                     fmt++;
@@ -575,4 +597,161 @@ static unsigned char* sstr_sprintf_num(unsigned char* buf, unsigned char* last,
 const char* sstr_version() {
     static const char* const version = "1.1.0";
     return version;
+}
+
+void sstr_append_int_str(sstr_t s, int i) {
+    unsigned char buf[SSTR_INT32_LEN + 1];
+    unsigned char* p = buf + SSTR_INT32_LEN;
+    uint32_t ui32;
+    int negative = 0;
+
+    if (i < 0) {
+        negative = 1;
+        ui32 = (uint32_t)-i;
+    } else {
+        ui32 = (uint32_t)i;
+    }
+
+    do {
+        *--p = (unsigned char)(ui32 % 10 + '0');
+    } while (ui32 /= 10);
+
+    if (negative) {
+        sstr_append_of(s, "-", 1);
+    }
+    sstr_append_of(s, p, buf + SSTR_INT32_LEN - p);
+}
+
+int sstr_parse_long(sstr_t s, long* v) {
+    size_t i = 0;
+    int negative = 0;
+    *v = 0;
+    unsigned char* p = (unsigned char*)STR_PTR(s);
+    for (i = 0; i < sstr_length(s); ++i) {
+        if (isspace(p[i])) {
+            continue;
+        }
+        if (p[i] == '-') {
+            negative = 1;
+        }
+    }
+    for (; i < sstr_length(s); ++i) {
+        if (isdigit(p[i])) {
+            *v = *v * 10 + p[i] - '0';
+        }
+    }
+
+    if (negative) {
+        *v = -*v;
+    }
+
+    return i;
+}
+
+int sstr_parse_int(sstr_t* s, int* v) {
+    long vr;
+    int r = sstr_parse_long(s, &vr);
+    *v = (int)vr;
+    return r;
+}
+
+void sstr_append_long_str(sstr_t s, long l) {
+    unsigned char buf[SSTR_INT64_LEN + 1];
+    unsigned char* p = buf + SSTR_INT64_LEN;
+    uint64_t ui64;
+    int negative = 0;
+    if (l < 0) {
+        negative = 1;
+        ui64 = (uint64_t)-l;
+    } else {
+        ui64 = (uint64_t)l;
+    }
+
+    do {
+        *--p = (unsigned char)(ui64 % 10 + '0');
+    } while (ui64 /= 10);
+    if (negative) {
+        sstr_append_of(s, "-", 1);
+    }
+    sstr_append_of(s, p, buf + SSTR_INT64_LEN - p);
+}
+
+void sstr_append_float_str(sstr_t s, float f, int precission) {
+    sstr_append_double_str(s, (double)f, precission);
+}
+
+// #define MAX_DOUBLE_LEN (sizeof("-1.7976931348623157E+308") - 1)
+void sstr_append_double_str(sstr_t s, double f, int precision) {
+    unsigned char buf[SSTR_INT64_LEN + 1];
+    unsigned char* p = buf + SSTR_INT64_LEN;
+    uint64_t ui64;
+    int negative = 0;
+    double f2;  // fractional part
+
+    // int part
+    if (f < 0) {
+        negative = 1;
+        ui64 = (uint64_t)-f;
+        f2 = -f - ui64;
+    } else {
+        ui64 = (uint64_t)f;
+        f2 = f - ui64;
+    }
+
+    do {
+        *--p = (unsigned char)(ui64 % 10 + '0');
+    } while (ui64 /= 10);
+    if (negative) {
+        sstr_append_of(s, "-", 1);
+    }
+    sstr_append_of(s, p, buf + SSTR_INT64_LEN - p);
+
+    // float part
+    if (f2 > 0 && f2 > 1e-6) {
+        sstr_append_of(s, ".", 1);
+        p = buf;
+        do {
+            f2 *= 10;
+            *p++ = (unsigned char)(f2 + '0');
+            f2 -= (long)f2;
+        } while (f2 > 1e-6 && f2 > 0.0 && p < buf + precision);
+
+        sstr_append_of(s, buf, p - buf);
+    }
+}
+
+int sstr_parse_double(sstr_t s, double* v) {
+    size_t i = 0;
+    int negative = 0;
+    *v = 0;
+    unsigned char* p = (unsigned char*)STR_PTR(s);
+    for (i = 0; i < sstr_length(s); ++i) {
+        if (isspace(p[i])) {
+            continue;
+        }
+        if (p[i] == '-') {
+            negative = 1;
+        }
+    }
+    for (; i < sstr_length(s); ++i) {
+        if (isdigit(p[i])) {
+            *v = *v * 10 + p[i] - '0';
+        }
+    }
+    if (p[i] == '.') i++;
+
+    double v2 = 0, d2 = 10;
+    for (; i < sstr_length(s); ++i) {
+        if (isdigit(p[i])) {
+            v2 += (p[i] - '0') / d2;
+            d2 *= 10;
+        }
+    }
+    *v += v2;
+
+    if (negative) {
+        *v = -*v;
+    }
+
+    return i;
 }

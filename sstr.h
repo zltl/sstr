@@ -307,8 +307,34 @@ void sstr_append_float_str(sstr_t s, float f, int precission);
 void sstr_append_double_str(sstr_t s, double f, int precision);
 int sstr_parse_double(sstr_t s, double* v);
 
+/**
+ * @brief Append if cond is true, otherwise do nothing.
+ *
+ * @param s the sstr_t to append to.
+ * @param data data to append.
+ * @param length length of \a data.
+ * @param cond condition
+ */
+void sstr_append_of_if(sstr_t s, const void* data, size_t length, int cond);
+/**
+ * @brief Append C style string if cond is true, otherwise do nothing.
+ * @param dst destination sstr_t to append to.
+ * @param src source C-style string to append
+ * @param cond condition
+ */
+#define sstr_append_cstr_if(dst, src, cond) \
+    sstr_append_of_if(dst, src, strlen(src), cond)
+
 // escape string to json string format
 int sstr_json_escape_string_append(sstr_t out, sstr_t in);
+
+/**
+ * @brief append spaces at the end of the sstr_t.
+ *
+ * @param s the sstr_t to append spaces to.
+ * @param indent numbers of spaces to append.
+ */
+void sstr_append_indent(sstr_t s, size_t indent);
 
 /**
  * @brief return version string.

@@ -809,3 +809,23 @@ int sstr_json_escape_string_append(sstr_t out, sstr_t in) {
     }
     return 0;
 }
+
+void sstr_append_of_if(sstr_t s, const void* data, size_t length, int cond) {
+    if (cond) {
+        size_t oldlen = sstr_length(s);
+        sstr_append_zero(s, length);
+        memcpy(STR_PTR(s) + oldlen, data, length);
+        STR_PTR(s)[sstr_length(s)] = '\0';
+    }
+}
+
+void sstr_append_indent(sstr_t s, size_t indent) {
+    if (indent == 0) {
+        return;
+    }
+    size_t cur_len = sstr_length(s);
+    sstr_append_zero(s, indent);
+    for (size_t i = 0; i < indent; i++) {
+        STR_PTR(s)[cur_len + i] = ' ';
+    }
+}

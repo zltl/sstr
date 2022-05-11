@@ -299,12 +299,59 @@ sstr_t sstr_printf_append(sstr_t buf, const char* fmt, ...);
 
 /// convert sstr <-> int,long,float,double
 
+/**
+ * @brief convert int to sstr
+ *
+ * @param s sstr_t that containing the result.
+ * @param i int to convert.
+ */
 void sstr_append_int_str(sstr_t s, int i);
+/**
+ * @brief convert sstr_t string to long
+ *
+ * @param s
+ * @param v
+ * @return int size of the string that parsed.
+ */
 int sstr_parse_long(sstr_t s, long* v);
+/**
+ * @brief convert sstr_t string to int
+ *
+ * @param s
+ * @param v
+ * @return int size of the string that parsed.
+ */
 int sstr_parse_int(sstr_t* s, int* v);
+/**
+ * @brief convert long to sstr_t
+ *
+ * @param s
+ * @param l
+ */
 void sstr_append_long_str(sstr_t s, long l);
+/**
+ * @brief convert float to sstr_t
+ *
+ * @param s
+ * @param f
+ * @param precission
+ */
 void sstr_append_float_str(sstr_t s, float f, int precission);
+/**
+ * @brief convert double to sstr_t
+ *
+ * @param s
+ * @param f
+ * @param precision
+ */
 void sstr_append_double_str(sstr_t s, double f, int precision);
+/**
+ * @brief parse sstr_t string to double
+ *
+ * @param s
+ * @param v
+ * @return int size of the string that parsed.
+ */
 int sstr_parse_double(sstr_t s, double* v);
 
 /**

@@ -10,6 +10,8 @@ The standard C style string is a sequence of characters terminated
 by a null character, which is easy to cause buffer overflow. And it's
 annoying to pass pointer and length of string to every whare.
 
+`sstr_t` supply a `sstr_printf()` function to format string.
+
 The sequence of characters just like a string in C++, inside the sstr_t
 struct, it also has a null character at the end, so that we can use
 sstr_t as a C style string.
